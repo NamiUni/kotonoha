@@ -75,6 +75,14 @@ import org.jspecify.annotations.NonNull;
 @SupportedSourceVersion(SourceVersion.RELEASE_21)
 public final class ResourceBundleGeneratorProcessor extends AbstractProcessor {
 
+    /**
+     * Creates a new {@code ResourceBundleGeneratorProcessor} instance.
+     *
+     * @since 0.1.0
+     */
+    public ResourceBundleGeneratorProcessor() {
+    }
+
     private static final Supplier<Properties> SORTED_PROPERTIES = () -> new Properties() {
         @Override
         public synchronized @NonNull Set<Map.Entry<Object, Object>> entrySet() {
