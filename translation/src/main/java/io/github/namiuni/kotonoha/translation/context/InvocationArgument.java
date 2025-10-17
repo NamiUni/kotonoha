@@ -24,8 +24,6 @@
 package io.github.namiuni.kotonoha.translation.context;
 
 import java.lang.reflect.Parameter;
-import java.util.Objects;
-import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -37,12 +35,6 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public sealed interface InvocationArgument permits InvocationArgumentImpl {
-
-    @ApiStatus.Internal
-    static InvocationArgument of(final Parameter parameter, final @Nullable Object value, final int index) {
-        Objects.requireNonNull(parameter, "parameter");
-        return new InvocationArgumentImpl(parameter, value, index);
-    }
 
     /**
      * Gets the parameter associated with this argument.
