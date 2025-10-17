@@ -14,5 +14,4 @@ dependencies {
 
     testImplementation(libs.adventure.text.minimessage)
     testImplementation(libs.adventure.text.serializer.plain)
-    testImplementation(libs.jspecify)
 }

@@ -27,5 +27,5 @@ tasks.compileJava {
 }
 
 dependencies {
-    compileOnlyApi(libs.jspecify)
+    api(libs.jspecify)
 }
