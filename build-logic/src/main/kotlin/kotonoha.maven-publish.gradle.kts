@@ -18,7 +18,7 @@ mavenPublishing {
 
     pom {
         name.set("kotonoha")
-        description.set("An Adventure-focused library.")
+        description.set("A localization framework for Adventure focused projects.")
         url.set("https://github.com/NamiUni/kotonoha")
         licenses {
             license {
