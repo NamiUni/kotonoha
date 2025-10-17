@@ -27,7 +27,7 @@ import io.github.namiuni.kotonoha.translation.configuration.TranslationConfigura
 import io.github.namiuni.kotonoha.translation.context.InvocationContext;
 import io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy;
 import io.github.namiuni.kotonoha.translation.policy.key.TranslationKeyResolutionPolicy;
-import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy;
+import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultTransformationPolicy;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -44,7 +44,7 @@ final class TranslationInvocationHandler implements InvocationHandler {
 
     private final TranslationKeyResolutionPolicy keyPolicy;
     private final TranslationArgumentAdaptationPolicy argumentPolicy;
-    private final InvocationResultRenderingPolicy resultPolicy;
+    private final InvocationResultTransformationPolicy resultPolicy;
 
     TranslationInvocationHandler(
             final TranslationConfiguration config
@@ -72,7 +72,7 @@ final class TranslationInvocationHandler implements InvocationHandler {
         final ComponentLike[] arguments = this.argumentPolicy.adaptArguments(context); // Adapt arguments
         final TranslatableComponent component = Component.translatable(key, arguments); // Create translatable component
 
-        return this.resultPolicy.renderResult(component, context); // Render result
+        return this.resultPolicy.transformResult(component, context); // Render result
     }
 
     private InvocationContext createContext(final Method method, final @Nullable Object @Nullable [] args) {

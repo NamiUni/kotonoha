@@ -25,7 +25,7 @@ package io.github.namiuni.kotonoha.translation.configuration;
 
 import io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy;
 import io.github.namiuni.kotonoha.translation.policy.key.TranslationKeyResolutionPolicy;
-import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy;
+import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultTransformationPolicy;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
@@ -53,7 +53,7 @@ public sealed interface TranslationConfiguration permits TranslationConfiguratio
     static TranslationConfiguration of(
             final TranslationKeyResolutionPolicy keyPolicy,
             final TranslationArgumentAdaptationPolicy argumentPolicy,
-            final InvocationResultRenderingPolicy resultPolicy
+            final InvocationResultTransformationPolicy resultPolicy
     ) {
         Objects.requireNonNull(keyPolicy, "keyPolicy");
         Objects.requireNonNull(argumentPolicy, "argumentPolicy");
@@ -84,7 +84,7 @@ public sealed interface TranslationConfiguration permits TranslationConfiguratio
      * @return the policy for transforming result components
      * @since 0.1.0
      */
-    InvocationResultRenderingPolicy resultPolicy();
+    InvocationResultTransformationPolicy resultPolicy();
 
     /**
      * Gets a new translation configuration with the modified translation key resolution policy.
@@ -117,7 +117,7 @@ public sealed interface TranslationConfiguration permits TranslationConfiguratio
      * @return a new {@code TranslationConfiguration} with the specified policy
      * @since 0.1.0
      */
-    default TranslationConfiguration withResultPolicy(final InvocationResultRenderingPolicy resultPolicy) {
+    default TranslationConfiguration withResultPolicy(final InvocationResultTransformationPolicy resultPolicy) {
         Objects.requireNonNull(resultPolicy, "resultPolicy");
         return TranslationConfiguration.of(this.keyPolicy(), this.argumentPolicy(), resultPolicy);
     }

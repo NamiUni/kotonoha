@@ -39,5 +39,5 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 @ApiStatus.Experimental
-public non-sealed interface CustomInvocationResultRenderingPolicy extends InvocationResultRenderingPolicy {
+public non-sealed interface CustomInvocationResultTransformationPolicy extends InvocationResultTransformationPolicy {
 }

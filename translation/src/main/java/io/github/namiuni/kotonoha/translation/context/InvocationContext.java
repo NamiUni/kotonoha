@@ -23,6 +23,7 @@
  */
 package io.github.namiuni.kotonoha.translation.context;
 
+import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultTransformationPolicy;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Objects;
@@ -44,7 +45,7 @@ import org.jspecify.annotations.Nullable;
  * @see java.lang.reflect.InvocationHandler
  * @see io.github.namiuni.kotonoha.translation.policy.key.TranslationKeyResolutionPolicy
  * @see io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy
- * @see io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy
+ * @see InvocationResultTransformationPolicy
  * @since 0.1.0
  */
 @NullMarked

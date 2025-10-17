@@ -44,18 +44,18 @@ import org.jspecify.annotations.NullMarked;
  * @since 0.1.0
  */
 @NullMarked
-public sealed interface InvocationResultRenderingPolicy extends TranslationPolicy permits CustomInvocationResultRenderingPolicy, NoOperationResultRenderingPolicy, StandardInvocationResultRenderingPolicy {
+public sealed interface InvocationResultTransformationPolicy extends TranslationPolicy permits CustomInvocationResultTransformationPolicy, NoOperationResultTransformationPolicy, StandardInvocationResultTransformationPolicy {
 
     /**
      * Creates a standard policy that uses the specified transformer to handle the {@link TranslatableComponent} transformation.
      *
      * @param transformer the transformer to use for converting the {@link TranslatableComponent} to the return type
-     * @return a new InvocationResultRenderingPolicy instance
+     * @return a new InvocationResultTransformationPolicy instance
      * @since 0.1.0
      */
-    static InvocationResultRenderingPolicy of(final ComponentTransformer transformer) {
+    static InvocationResultTransformationPolicy of(final ComponentTransformer transformer) {
         Objects.requireNonNull(transformer, "transformer");
-        return new StandardInvocationResultRenderingPolicy(transformer);
+        return new StandardInvocationResultTransformationPolicy(transformer);
     }
 
     /**
@@ -64,8 +64,8 @@ public sealed interface InvocationResultRenderingPolicy extends TranslationPolic
      * @return the policy of not transforming components
      * @since 0.1.0
      */
-    static InvocationResultRenderingPolicy of() {
-        return NoOperationResultRenderingPolicy.INSTANCE;
+    static InvocationResultTransformationPolicy of() {
+        return NoOperationResultTransformationPolicy.INSTANCE;
     }
 
     /**
@@ -73,10 +73,10 @@ public sealed interface InvocationResultRenderingPolicy extends TranslationPolic
      *
      * @param component the created translatable component
      * @param context   the invocation context
-     * @return the rendered object, which will be the final return value of the proxy method call.
+     * @return the transformed object, which will be the final return value of the proxy method call.
      * @see java.lang.reflect.InvocationHandler
      * @since 0.1.0
      */
     @UnknownNullability
-    Object renderResult(TranslatableComponent component, InvocationContext context);
+    Object transformResult(TranslatableComponent component, InvocationContext context);
 }

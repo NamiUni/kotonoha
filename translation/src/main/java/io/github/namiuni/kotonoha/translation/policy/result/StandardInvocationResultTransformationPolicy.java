@@ -35,10 +35,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-record StandardInvocationResultRenderingPolicy(@Nullable ComponentTransformer transformer) implements InvocationResultRenderingPolicy {
+record StandardInvocationResultTransformationPolicy(@Nullable ComponentTransformer transformer) implements InvocationResultTransformationPolicy {
 
     @Override
-    public @UnknownNullability Object renderResult(final TranslatableComponent component, final InvocationContext context) {
+    public @UnknownNullability Object transformResult(final TranslatableComponent component, final InvocationContext context) {
 
         final Method method = context.method();
         final Type genericReturnType = method.getGenericReturnType();

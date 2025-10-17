@@ -25,13 +25,13 @@ package io.github.namiuni.kotonoha.translation.configuration;
 
 import io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy;
 import io.github.namiuni.kotonoha.translation.policy.key.TranslationKeyResolutionPolicy;
-import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy;
+import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultTransformationPolicy;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 record TranslationConfigurationImpl(
         TranslationKeyResolutionPolicy keyPolicy,
         TranslationArgumentAdaptationPolicy argumentPolicy,
-        InvocationResultRenderingPolicy resultPolicy
+        InvocationResultTransformationPolicy resultPolicy
 ) implements TranslationConfiguration {
 }

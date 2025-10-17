@@ -9,12 +9,12 @@ import org.jetbrains.annotations.UnknownNullability;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-record NoOperationResultRenderingPolicy() implements InvocationResultRenderingPolicy {
+record NoOperationResultTransformationPolicy() implements InvocationResultTransformationPolicy {
 
-    static NoOperationResultRenderingPolicy INSTANCE = new NoOperationResultRenderingPolicy();
+    static NoOperationResultTransformationPolicy INSTANCE = new NoOperationResultTransformationPolicy();
 
     @Override
-    public @UnknownNullability Object renderResult(final TranslatableComponent component, final InvocationContext context) {
+    public @UnknownNullability Object transformResult(final TranslatableComponent component, final InvocationContext context) {
         return component;
     }
 

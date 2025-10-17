@@ -25,7 +25,7 @@ package io.github.namiuni.kotonoha.translation.configuration;
 
 import io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy;
 import io.github.namiuni.kotonoha.translation.policy.key.TranslationKeyResolutionPolicy;
-import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy;
+import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultTransformationPolicy;
 import io.github.namiuni.kotonoha.translation.utility.TranslationArgumentAdapter;
 import org.jspecify.annotations.NullMarked;
 
@@ -37,7 +37,7 @@ record MessageFormatType() implements FormatType {
         return TranslationConfiguration.of(
                 TranslationKeyResolutionPolicy.annotationKeyResolutionPolicy(),
                 TranslationArgumentAdaptationPolicy.messageFormat(TranslationArgumentAdapter.standard()),
-                InvocationResultRenderingPolicy.of()
+                InvocationResultTransformationPolicy.of()
         );
     }
 }

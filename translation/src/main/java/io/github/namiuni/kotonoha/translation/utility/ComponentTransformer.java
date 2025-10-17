@@ -23,6 +23,7 @@
  */
 package io.github.namiuni.kotonoha.translation.utility;
 
+import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultTransformationPolicy;
 import io.leangen.geantyref.TypeToken;
 import java.lang.reflect.Type;
 import java.util.function.Function;
@@ -35,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
  * (e.g., converting a component to a {@code String}).
  *
  * @see Component
- * @see io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy
+ * @see InvocationResultTransformationPolicy
  * @since 0.1.0
  */
 // Design Note:

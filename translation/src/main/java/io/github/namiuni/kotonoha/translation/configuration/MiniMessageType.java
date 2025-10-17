@@ -26,7 +26,7 @@ package io.github.namiuni.kotonoha.translation.configuration;
 import io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy;
 import io.github.namiuni.kotonoha.translation.policy.argument.name.ArgumentNameResolver;
 import io.github.namiuni.kotonoha.translation.policy.key.TranslationKeyResolutionPolicy;
-import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy;
+import io.github.namiuni.kotonoha.translation.policy.result.InvocationResultTransformationPolicy;
 import io.github.namiuni.kotonoha.translation.utility.TranslationArgumentAdapter;
 import org.jspecify.annotations.NullMarked;
 
@@ -38,7 +38,7 @@ record MiniMessageType() implements FormatType {
         return TranslationConfiguration.of(
                 TranslationKeyResolutionPolicy.annotationKeyResolutionPolicy(),
                 TranslationArgumentAdaptationPolicy.miniMessage(TranslationArgumentAdapter.standard(), ArgumentNameResolver.annotationNameResolver()),
-                InvocationResultRenderingPolicy.of()
+                InvocationResultTransformationPolicy.of()
         );
     }
 }
