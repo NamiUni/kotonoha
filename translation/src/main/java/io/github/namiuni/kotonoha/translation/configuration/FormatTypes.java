@@ -35,7 +35,20 @@ import org.jspecify.annotations.NullMarked;
 @SuppressWarnings("unused")
 public final class FormatTypes {
 
+    /**
+     * {@code MessageFormat} style.
+     *
+     * @see java.text.MessageFormat
+     * @since 0.1.0
+     */
     public static final FormatType MESSAGE_FORMAT;
+
+    /**
+     * {@code MiniMessage} style.
+     *
+     * @see net.kyori.adventure.text.minimessage.MiniMessage
+     * @since 0.1.0
+     */
     public static final FormatType MINI_MESSAGE;
 
     static {

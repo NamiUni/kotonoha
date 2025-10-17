@@ -50,6 +50,9 @@ import org.jspecify.annotations.NullMarked;
 @ApiStatus.Experimental
 public sealed interface TranslationArgumentAdaptationPolicy extends TranslationPolicy permits CustomTranslationArgumentAdaptationPolicy, MessageFormatTranslationArgumentAdaptationPolicy, MiniMessageTranslationArgumentAdaptationPolicy {
 
+    /**
+     * An empty {@code ComponentLike} array returned when a method's argument is empty.
+     */
     ComponentLike[] EMPTY_COMPONENT_LIKE_ARRAY = new ComponentLike[0];
 
     /**
