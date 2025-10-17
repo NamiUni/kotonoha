@@ -24,9 +24,9 @@
 package io.github.namiuni.kotonoha.resourcebundle.generator.processor;
 
 import io.github.namiuni.kotonoha.annotations.Key;
+import io.github.namiuni.kotonoha.annotations.Message;
+import io.github.namiuni.kotonoha.annotations.Messages;
 import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-import io.github.namiuni.kotonoha.annotations.Value;
-import io.github.namiuni.kotonoha.annotations.Values;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Comparator;
@@ -59,9 +59,9 @@ import org.jspecify.annotations.NonNull;
  * An annotation processor that generates Java {@link java.util.ResourceBundle} property files
  * from interfaces annotated with {@link ResourceBundle}.
  *
- * <p>This processor scans methods within annotated interfaces for {@link Key}, {@link ResourceBundle}, {@link Value},
- * {@link Values} annotations
- * to construct translation keys and values. It then writes these into standard
+ * <p>This processor scans methods within annotated interfaces for {@link Key}, {@link ResourceBundle}, {@link Message},
+ * {@link Messages} annotations
+ * to construct translation keys and messages. It then writes these into standard
  * `.properties` files, grouped by locale.</p>
  *
  * @since 0.1.0
@@ -69,19 +69,11 @@ import org.jspecify.annotations.NonNull;
 @SupportedAnnotationTypes({
         "io.github.namiuni.kotonoha.annotations.Key",
         "io.github.namiuni.kotonoha.annotations.ResourceBundle",
-        "io.github.namiuni.kotonoha.annotations.Value",
-        "io.github.namiuni.kotonoha.annotations.Values"
+        "io.github.namiuni.kotonoha.annotations.Message",
+        "io.github.namiuni.kotonoha.annotations.Messages"
 })
 @SupportedSourceVersion(SourceVersion.RELEASE_21)
 public final class ResourceBundleGeneratorProcessor extends AbstractProcessor {
-
-    /**
-     * Creates a new {@code ResourceBundleGeneratorProcessor} instance.
-     *
-     * @since 0.1.0
-     */
-    public ResourceBundleGeneratorProcessor() {
-    }
 
     private static final Supplier<Properties> SORTED_PROPERTIES = () -> new Properties() {
         @Override
@@ -96,6 +88,14 @@ public final class ResourceBundleGeneratorProcessor extends AbstractProcessor {
 
     private Filer filer;
     private Messager messager;
+
+    /**
+     * Creates a new {@code ResourceBundleGeneratorProcessor} instance.
+     *
+     * @since 0.1.0
+     */
+    public ResourceBundleGeneratorProcessor() {
+    }
 
     @Override
     public synchronized void init(final ProcessingEnvironment processingEnv) {
@@ -159,29 +159,29 @@ public final class ResourceBundleGeneratorProcessor extends AbstractProcessor {
 
         final String key = keyAnnotation.value();
 
-        // Process @Value annotations (both single and repeatable)
-        final Value[] valueAnnotations = this.getValueAnnotations(method);
+        // Process @Message annotations (both single and repeatable)
+        final Message[] messageAnnotations = this.getMessageAnnotations(method);
 
-        for (final Value valueAnnotation : valueAnnotations) {
-            final String localeKey = this.getLocaleKey(valueAnnotation.locale());
-            final String content = valueAnnotation.content();
+        for (final Message messageAnnotation : messageAnnotations) {
+            final String localeKey = this.getLocaleKey(messageAnnotation.locale());
+            final String content = messageAnnotation.content();
 
             localeProperties.computeIfAbsent(localeKey, k -> SORTED_PROPERTIES.get()).setProperty(key, content);
         }
     }
 
-    private Value[] getValueAnnotations(final ExecutableElement method) {
-        final Values valuesAnnotation = method.getAnnotation(Values.class);
-        if (valuesAnnotation != null) {
-            return valuesAnnotation.value();
+    private Message[] getMessageAnnotations(final ExecutableElement method) {
+        final Messages messagesAnnotation = method.getAnnotation(Messages.class);
+        if (messagesAnnotation != null) {
+            return messagesAnnotation.value();
         }
 
-        final Value valueAnnotation = method.getAnnotation(Value.class);
-        if (valueAnnotation != null) {
-            return new Value[] {valueAnnotation};
+        final Message messageAnnotation = method.getAnnotation(Message.class);
+        if (messageAnnotation != null) {
+            return new Message[] {messageAnnotation};
         }
 
-        return new Value[0];
+        return new Message[0];
     }
 
     private String getLocaleKey(final String localeString) {

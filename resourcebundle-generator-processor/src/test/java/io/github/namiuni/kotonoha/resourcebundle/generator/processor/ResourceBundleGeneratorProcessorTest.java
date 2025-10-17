@@ -54,8 +54,8 @@ class ResourceBundleGeneratorProcessorTest {
 
             assertTrue(supportedTypes.contains("io.github.namiuni.kotonoha.annotations.Key"));
             assertTrue(supportedTypes.contains("io.github.namiuni.kotonoha.annotations.ResourceBundle"));
-            assertTrue(supportedTypes.contains("io.github.namiuni.kotonoha.annotations.Value"));
-            assertTrue(supportedTypes.contains("io.github.namiuni.kotonoha.annotations.Values"));
+            assertTrue(supportedTypes.contains("io.github.namiuni.kotonoha.annotations.Message"));
+            assertTrue(supportedTypes.contains("io.github.namiuni.kotonoha.annotations.Messages"));
 
             assertEquals(4, supportedTypes.size());
 
@@ -86,25 +86,25 @@ class ResourceBundleGeneratorProcessorTest {
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
-                            import io.github.namiuni.kotonoha.annotations.Values;
+                            import io.github.namiuni.kotonoha.annotations.Message;
+                            import io.github.namiuni.kotonoha.annotations.Messages;
                             
                             @ResourceBundle(baseName = "test-messages")
                             public interface TestMessageService {
                             
                                 @Key("test.simple.message")
-                                @Value(locale = Locales.EN_US, content = "Hello World")
+                                @Message(locale = Locales.EN_US, content = "Hello World")
                                 void simpleMessage();
                             
                                 @Key("test.multiple.locales")
-                                @Values({
-                                    @Value(locale = Locales.EN_US, content = "Welcome"),
-                                    @Value(locale = Locales.JA_JP, content = "ようこそ")
+                                @Messages({
+                                    @Message(locale = Locales.EN_US, content = "Welcome"),
+                                    @Message(locale = Locales.JA_JP, content = "ようこそ")
                                 })
                                 void multipleLocales();
                             
                                 @Key("test.with.parameters")
-                                @Value(locale = Locales.EN_US, content = "Hello <name>!")
+                                @Message(locale = Locales.EN_US, content = "Hello <name>!")
                                 void withParameters(String name);
                             }
                             """
@@ -119,22 +119,22 @@ class ResourceBundleGeneratorProcessorTest {
         }
 
         @Test
-        @DisplayName("Verify that method with single @Value annotation is processed correctly")
-        void testProcessWithSingleValueAnnotation() {
+        @DisplayName("Verify that method with single @Message annotation is processed correctly")
+        void testProcessWithSingleMessageAnnotation() {
             final JavaFileObject testInterface = JavaFileObjects.forSourceString(
-                    TEST_PACKAGE + ".SingleValueInterface",
+                    TEST_PACKAGE + ".SingleMessageInterface",
                     """
                             package test;
                             
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
+                            import io.github.namiuni.kotonoha.annotations.Message;
                             
-                            @ResourceBundle(baseName = "single-value")
-                            public interface SingleValueInterface {
+                            @ResourceBundle(baseName = "single-message")
+                            public interface SingleMessageInterface {
                                 @Key("hello.world")
-                                @Value(locale = Locales.EN_US, content = "Hello, World!")
+                                @Message(locale = Locales.EN_US, content = "Hello, World!")
                                 void helloWorld();
                             }
                             """
@@ -171,25 +171,25 @@ class ResourceBundleGeneratorProcessorTest {
         }
 
         @Test
-        @DisplayName("Verify that repeatable @Value annotations are processed correctly")
-        void testProcessWithRepeatableValueAnnotations() {
+        @DisplayName("Verify that repeatable @Message annotations are processed correctly")
+        void testProcessWithRepeatableMessageAnnotations() {
             final JavaFileObject testInterface = JavaFileObjects.forSourceString(
-                    TEST_PACKAGE + ".RepeatableValueInterface",
+                    TEST_PACKAGE + ".RepeatableMessageInterface",
                     """
                             package test;
                             
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
+                            import io.github.namiuni.kotonoha.annotations.Message;
                             
-                            @ResourceBundle(baseName = "repeatable-values")
-                            public interface RepeatableValueInterface {
+                            @ResourceBundle(baseName = "repeatable-messages")
+                            public interface RepeatableMessageInterface {
                                 @Key("test.repeatable.message")
-                                @Value(locale = Locales.EN_US, content = "Hello")
-                                @Value(locale = Locales.JA_JP, content = "こんにちは")
-                                @Value(locale = Locales.DE_DE, content = "Hallo")
-                                void multipleRepeatableValues();
+                                @Message(locale = Locales.EN_US, content = "Hello")
+                                @Message(locale = Locales.JA_JP, content = "こんにちは")
+                                @Message(locale = Locales.DE_DE, content = "Hallo")
+                                void multipleRepeatableMessages();
                             }
                             """
             );
@@ -203,32 +203,32 @@ class ResourceBundleGeneratorProcessorTest {
         }
 
         @Test
-        @DisplayName("Verify that mixed @Value and @Values annotations work correctly")
-        void testProcessWithMixedValueAnnotations() {
+        @DisplayName("Verify that mixed @Message and @Messages annotations work correctly")
+        void testProcessWithMixedMessageAnnotations() {
             final JavaFileObject testInterface = JavaFileObjects.forSourceString(
-                    TEST_PACKAGE + ".MixedValueInterface",
+                    TEST_PACKAGE + ".MixedMessageInterface",
                     """
                             package test;
                             
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
-                            import io.github.namiuni.kotonoha.annotations.Values;
+                            import io.github.namiuni.kotonoha.annotations.Message;
+                            import io.github.namiuni.kotonoha.annotations.Messages;
                             
-                            @ResourceBundle(baseName = "mixed-values")
-                            public interface MixedValueInterface {
+                            @ResourceBundle(baseName = "mixed-messages")
+                            public interface MixedMessageInterface {
                                 @Key("test.repeatable")
-                                @Value(locale = Locales.EN_US, content = "Repeatable Hello")
-                                @Value(locale = Locales.JA_JP, content = "リピータブル こんにちは")
-                                void repeatableValues();
+                                @Message(locale = Locales.EN_US, content = "Repeatable Hello")
+                                @Message(locale = Locales.JA_JP, content = "リピータブル こんにちは")
+                                void repeatableMessages();
                             
                                 @Key("test.wrapped")
-                                @Values({
-                                    @Value(locale = Locales.EN_US, content = "Wrapped Hello"),
-                                    @Value(locale = Locales.DE_DE, content = "Eingepackt Hallo")
+                                @Messages({
+                                    @Message(locale = Locales.EN_US, content = "Wrapped Hello"),
+                                    @Message(locale = Locales.DE_DE, content = "Eingepackt Hallo")
                                 })
-                                void wrappedValues();
+                                void wrappedMessages();
                             }
                             """
             );
@@ -252,12 +252,12 @@ class ResourceBundleGeneratorProcessorTest {
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
+                            import io.github.namiuni.kotonoha.annotations.Message;
                             
                             @ResourceBundle(baseName = "root-locale")
                             public interface RootLocaleInterface {
                                 @Key("test.root.message")
-                                @Value(locale = Locales.ROOT, content = "Default message")
+                                @Message(locale = Locales.ROOT, content = "Default message")
                                 void rootLocaleMessage();
                             }
                             """
@@ -282,18 +282,18 @@ class ResourceBundleGeneratorProcessorTest {
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
+                            import io.github.namiuni.kotonoha.annotations.Message;
                             
                             @ResourceBundle(baseName = "static-method")
                             public interface StaticMethodInterface {
                                 @Key("test.static.message")
-                                @Value(locale = Locales.EN_US, content = "Static message")
+                                @Message(locale = Locales.EN_US, content = "Static message")
                                 static void staticMethod() {
                                     // Static method implementation
                                 }
                             
                                 @Key("test.instance.message")
-                                @Value(locale = Locales.EN_US, content = "Instance message")
+                                @Message(locale = Locales.EN_US, content = "Instance message")
                                 void instanceMethod();
                             }
                             """
@@ -319,18 +319,18 @@ class ResourceBundleGeneratorProcessorTest {
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
+                            import io.github.namiuni.kotonoha.annotations.Message;
                             
                             @ResourceBundle(baseName = "default-method")
                             public interface DefaultMethodInterface {
                                 @Key("test.default.message")
-                                @Value(locale = Locales.EN_US, content = "Default message")
+                                @Message(locale = Locales.EN_US, content = "Default message")
                                 default void defaultMethod() {
                                     // Default method implementation
                                 }
                             
                                 @Key("test.abstract.message")
-                                @Value(locale = Locales.EN_US, content = "Abstract message")
+                                @Message(locale = Locales.EN_US, content = "Abstract message")
                                 void abstractMethod();
                             }
                             """
@@ -356,20 +356,20 @@ class ResourceBundleGeneratorProcessorTest {
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
+                            import io.github.namiuni.kotonoha.annotations.Message;
                             
                             @ResourceBundle(baseName = "mixed-methods")
                             public interface MixedMethodTypesInterface {
                                 @Key("test.static.method")
-                                @Value(locale = Locales.EN_US, content = "Static content")
+                                @Message(locale = Locales.EN_US, content = "Static content")
                                 static void staticMethod() {}
                             
                                 @Key("test.default.method")
-                                @Value(locale = Locales.EN_US, content = "Default content")
+                                @Message(locale = Locales.EN_US, content = "Default content")
                                 default void defaultMethod() {}
                             
                                 @Key("test.abstract.method")
-                                @Value(locale = Locales.EN_US, content = "Abstract content")
+                                @Message(locale = Locales.EN_US, content = "Abstract content")
                                 void abstractMethod();
                             }
                             """
@@ -447,7 +447,7 @@ class ResourceBundleGeneratorProcessorTest {
                             
                             @ResourceBundle(baseName = "test")
                             public enum TestEnum {
-                                VALUE1, VALUE2
+                                MESSAGE1, MESSAGE2
                             }
                             """
             );
@@ -470,7 +470,7 @@ class ResourceBundleGeneratorProcessorTest {
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
                             
                             @ResourceBundle(baseName = "test")
-                            public record TestRecord(String value) {
+                            public record TestRecord(String message) {
                             }
                             """
             );
@@ -562,8 +562,8 @@ class ResourceBundleGeneratorProcessorTest {
         }
 
         @Test
-        @DisplayName("Verify processing of method with @Key but no @Value/@Values")
-        void testMethodWithKeyButNoValue() {
+        @DisplayName("Verify processing of method with @Key but no @Message/@Messages")
+        void testMethodWithKeyButNoMessage() {
             final JavaFileObject testInterface = JavaFileObjects.forSourceString(
                     TEST_PACKAGE + ".IncompleteInterface",
                     """
@@ -598,12 +598,12 @@ class ResourceBundleGeneratorProcessorTest {
                             import io.github.namiuni.kotonoha.annotations.Key;
                             import io.github.namiuni.kotonoha.annotations.Locales;
                             import io.github.namiuni.kotonoha.annotations.ResourceBundle;
-                            import io.github.namiuni.kotonoha.annotations.Value;
+                            import io.github.namiuni.kotonoha.annotations.Message;
                             
                             @ResourceBundle(baseName = "mixed")
                             public interface MixedInterface {
                                 @Key("valid.key")
-                                @Value(locale = Locales.EN_US, content = "Valid content")
+                                @Message(locale = Locales.EN_US, content = "Valid content")
                                 void validMethod();
                             
                                 void methodWithoutAnnotations();

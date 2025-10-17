@@ -9,7 +9,7 @@ version = projectVersion
 dependencies {
     sequenceOf(
         "annotations",
-        "translation",
+        "translatable-message",
 //    "translation-extra-miniplaceholders"
         "resourcebundle-generator-processor",
     ).forEach {

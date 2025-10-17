@@ -17,7 +17,7 @@ pluginManagement {
 sequenceOf(
     "annotations",
     "bom",
-    "translation",
+    "translatable-message",
 //    "translation-extra-miniplaceholders"
     "resourcebundle-generator-processor",
 ).forEach {
