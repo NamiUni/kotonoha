@@ -44,7 +44,6 @@ public interface TranslationPolicy {
 
     /**
      * Validates whether the given method is compatible with this translation policy.
-     * <p>
      *
      * @param method the method being validated
      * @throws TranslationValidationException if the method fails to satisfy the requirements of this policy

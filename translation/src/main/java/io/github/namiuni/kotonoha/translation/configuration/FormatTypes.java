@@ -23,13 +23,12 @@
  */
 package io.github.namiuni.kotonoha.translation.configuration;
 
-import io.github.namiuni.kotonoha.translation.KotonohaTranslations;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Holds various message format types used when creating proxy instances in {@link KotonohaTranslations}.
+ * Holds various message format types used when creating proxy instances in {@link io.github.namiuni.kotonoha.translation.KotonohaTranslations}.
  *
- * @see KotonohaTranslations
+ * @see io.github.namiuni.kotonoha.translation.KotonohaTranslations
  * @since 0.1.0
  */
 @NullMarked
