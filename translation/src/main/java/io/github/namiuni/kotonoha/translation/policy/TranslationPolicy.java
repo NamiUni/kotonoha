@@ -23,17 +23,16 @@
  */
 package io.github.namiuni.kotonoha.translation.policy;
 
-import io.github.namiuni.kotonoha.translation.KotonohaTranslations;
 import java.lang.reflect.Method;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Base interface for policies that govern the behavior of a translation proxy.
+ * Defines the base contract for policies that govern the behavior of a translation proxy.
  * <p>
  * Implementations of this interface define a specific strategy for handling
  * a part of the translation process (e.g., key resolution, argument adaptation, result transformation).
- * This policy is primarily used to validate if a method is eligible for proxying.
+ * This policy is primarily used to validate whether a method is eligible for proxying.
  *
  * @see io.github.namiuni.kotonoha.translation.configuration.TranslationConfiguration
  * @since 0.1.0
@@ -46,8 +45,8 @@ public interface TranslationPolicy {
      * Validates whether the given method is compatible with this translation policy.
      *
      * @param method the method being validated
-     * @throws TranslationValidationException if the method fails to satisfy the requirements of this policy
-     * @see KotonohaTranslations
+     * @throws TranslationValidationException if the method fails validation based on this policy’s requirements
+     * @see io.github.namiuni.kotonoha.translation.KotonohaTranslations
      * @since 0.1.0
      */
     void validate(Method method) throws TranslationValidationException;

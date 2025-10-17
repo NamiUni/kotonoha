@@ -44,10 +44,10 @@ import org.jspecify.annotations.NullMarked;
  * @since 0.1.0
  */
 @NullMarked
-public sealed interface InvocationResultRenderingPolicy extends TranslationPolicy permits CustomInvocationResultRenderingPolicy, StandardInvocationResultRenderingPolicy {
+public sealed interface InvocationResultRenderingPolicy extends TranslationPolicy permits CustomInvocationResultRenderingPolicy, NoOperationResultRenderingPolicy, StandardInvocationResultRenderingPolicy {
 
     /**
-     * Returns a standard policy that uses the specified transformer to handle the {@link TranslatableComponent} transformation.
+     * Creates a standard policy that uses the specified transformer to handle the {@link TranslatableComponent} transformation.
      *
      * @param transformer the transformer to use for converting the {@link TranslatableComponent} to the return type
      * @return a new InvocationResultRenderingPolicy instance
@@ -59,17 +59,17 @@ public sealed interface InvocationResultRenderingPolicy extends TranslationPolic
     }
 
     /**
-     * Returns a standard policy that non uses a transformer.
+     * Returns a policy that does not transform {@link TranslatableComponent}.
      *
-     * @return a new InvocationResultRenderingPolicy instance
+     * @return the policy of not transforming components
      * @since 0.1.0
      */
     static InvocationResultRenderingPolicy of() {
-        return new StandardInvocationResultRenderingPolicy(null);
+        return NoOperationResultRenderingPolicy.INSTANCE;
     }
 
     /**
-     * Render the created {@link TranslatableComponent} into the object required by the method's return type.
+     * Transforms the given {@link TranslatableComponent} into the object required by the method's return type.
      *
      * @param component the created translatable component
      * @param context   the invocation context

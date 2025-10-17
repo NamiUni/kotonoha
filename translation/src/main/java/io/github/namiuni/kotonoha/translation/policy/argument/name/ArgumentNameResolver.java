@@ -28,9 +28,11 @@ import net.kyori.adventure.text.minimessage.tag.TagPattern;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines the strategy for resolving the name of an argument used in {@link net.kyori.adventure.text.minimessage.MiniMessage} format that rely on argument naming.
+ * Defines a strategy for resolving the name of an argument used in
+ * {@link net.kyori.adventure.text.minimessage.MiniMessage} formats that rely on argument naming.
  * <p>
- * The resolved name is typically used as a tag key in a {@link net.kyori.adventure.text.minimessage.MiniMessage} format string.
+ * The resolved name is typically used as a tag key in
+ * a {@link net.kyori.adventure.text.minimessage.MiniMessage} format string.
  *
  * @see net.kyori.adventure.text.minimessage.MiniMessage
  * @see net.kyori.adventure.text.minimessage.translation.Argument
@@ -43,7 +45,7 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
     /**
      * Returns a resolver that retrieves the argument name exclusively from {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
      *
-     * @return the annotation-based name resolver
+     * @return an annotation-based name resolver
      * @see net.kyori.adventure.text.minimessage.MiniMessage
      * @see net.kyori.adventure.text.minimessage.translation.Argument
      * @see net.kyori.adventure.text.minimessage.tag.Tag
@@ -58,7 +60,7 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
      * Returns a resolver that first attempts to retrieve the argument name from the {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
      * If no annotation exists, it returns the name provided by the compiler for the parameter, converted to snake case.
      *
-     * @return the annotation or parameter name resolver
+     * @return an annotation or parameter name resolver
      * @see net.kyori.adventure.text.minimessage.MiniMessage
      * @see net.kyori.adventure.text.minimessage.translation.Argument
      * @see net.kyori.adventure.text.minimessage.tag.Tag
@@ -71,7 +73,8 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
     }
 
     /**
-     * Resolves and returns the translation argument name for the given parameter.
+     * Resolves and returns the name of a translation argument,
+     * typically used as a tag key in a MiniMessage format string.
      * <p>
      * The returned string is typically expected to be a valid tag key pattern for MiniMessage.
      *
@@ -87,7 +90,7 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
     String resolve(Parameter parameter);
 
     /**
-     * Checks if this resolver can determine a name for the given parameter.
+     * Determines whether this resolver can extract a valid argument name from the given parameter.
      *
      * @param parameter the parameter
      * @return {@code true} if a name can be resolved, {@code false} otherwise

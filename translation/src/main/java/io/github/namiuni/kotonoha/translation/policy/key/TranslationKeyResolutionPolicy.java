@@ -28,9 +28,10 @@ import io.github.namiuni.kotonoha.translation.policy.TranslationPolicy;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines the strategy for resolving the translation key from a proxy interface method invocation.
+ * Defines a strategy for resolving the translation key from a proxy interface method invocation.
  * <p>
- * The key is typically derived from an {@link io.github.namiuni.kotonoha.annotations.Key} annotation on the method or a convention based on the method name.
+ * The key is typically derived from an {@link io.github.namiuni.kotonoha.annotations.Key} annotation on the method,
+ * or, if absent, from the method name following a predefined naming convention.
  *
  * @see java.lang.reflect.InvocationHandler
  * @see net.kyori.adventure.text.TranslatableComponent
@@ -56,9 +57,10 @@ public sealed interface TranslationKeyResolutionPolicy extends TranslationPolicy
      *
      * @param context the invocation context containing the method and its arguments
      * @return the resolved translation key
+     * @throws IllegalStateException if a translation key is invalid or cannot be resolved based on the policy rules
      * @see net.kyori.adventure.text.TranslatableComponent
      * @see java.lang.reflect.InvocationHandler
      * @since 0.1.0
      */
-    String resolveKey(InvocationContext context);
+    String resolveKey(InvocationContext context) throws IllegalStateException;
 }

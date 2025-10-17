@@ -28,8 +28,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines the strategy for adapting the method arguments from an interface method
- * into the arguments (with type {@link ComponentLike}) required by a {@link net.kyori.adventure.text.TranslatableComponent}.
+ * Defines a strategy for adapting interface method arguments into
+ * {@link ComponentLike} values used by a {@link net.kyori.adventure.text.TranslatableComponent}.
  * <p>
  * This policy is executed during the proxy method invocation to prepare the arguments
  * for the final translation component creation.

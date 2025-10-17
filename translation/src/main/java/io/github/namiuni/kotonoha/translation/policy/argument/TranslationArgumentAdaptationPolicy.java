@@ -35,8 +35,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines the strategy for adapting the method arguments from an interface method
- * into the arguments (with type {@link ComponentLike}) required by a {@link net.kyori.adventure.text.TranslatableComponent}.
+ * Defines a strategy for adapting interface method arguments into
+ * {@link ComponentLike} values used by a {@link net.kyori.adventure.text.TranslatableComponent}.
  * <p>
  * This policy is executed during the proxy method invocation to prepare the arguments
  * for the final translation component creation.
@@ -51,12 +51,12 @@ import org.jspecify.annotations.NullMarked;
 public sealed interface TranslationArgumentAdaptationPolicy extends TranslationPolicy permits CustomTranslationArgumentAdaptationPolicy, MessageFormatTranslationArgumentAdaptationPolicy, MiniMessageTranslationArgumentAdaptationPolicy {
 
     /**
-     * An empty {@code ComponentLike} array returned when a method's argument is empty.
+     * An empty {@code ComponentLike} array returned when the invoked method has no arguments.
      */
     ComponentLike[] EMPTY_COMPONENT_LIKE_ARRAY = new ComponentLike[0];
 
     /**
-     * Returns a policy that adapts arguments based on their positional order
+     * Creates a policy that adapts arguments based on their positional order
      * for use with {@link java.text.MessageFormat} style translation strings.
      *
      * @param argumentAdapter the adapter used to convert raw Java types to {@link net.kyori.adventure.text.TranslationArgument} objects
@@ -70,14 +70,14 @@ public sealed interface TranslationArgumentAdaptationPolicy extends TranslationP
     }
 
     /**
-     * Returns a policy that adapts arguments based on their resolved name
+     * Creates a policy that adapts arguments based on their resolved name
      * for use with {@link net.kyori.adventure.text.minimessage.MiniMessage} style translation strings.
      * <p>
      * This policy supports special parameter types for MiniMessage, which are directly
      * passed to the translation context without standard adaptation:
      * <ul>
-     * <li>Arguments of type {@link net.kyori.adventure.text.minimessage.tag.Tag} are included in the translation arguments.</li>
-     * <li>Arguments of type {@link net.kyori.adventure.text.minimessage.tag.resolver.TagResolver} are included in the translation arguments.</li>
+     * <li>Arguments of type {@link net.kyori.adventure.text.minimessage.tag.Tag} are passed through to the translation context without further adaptation.</li>
+     * <li>Arguments of type {@link net.kyori.adventure.text.minimessage.tag.resolver.TagResolver} are passed through to the translation context without further adaptation.</li>
      * <li>A single argument of type {@link Pointered} is used as the target for context-aware translation.</li>
      * </ul>
      *
@@ -99,7 +99,7 @@ public sealed interface TranslationArgumentAdaptationPolicy extends TranslationP
      * {@link ComponentLike} objects suitable for a {@link net.kyori.adventure.text.TranslatableComponent}.
      *
      * @param context the invocation context containing the method and its arguments
-     * @return an array of resolved translation arguments
+     * @return an array of ComponentLike values representing the adapted translation arguments
      * @throws IllegalArgumentException if an argument value is invalid or cannot be adapted based on the policy rules
      * @throws NullPointerException     if an argument in the method is null
      * @see java.lang.reflect.InvocationHandler#invoke(Object, Method, Object[])

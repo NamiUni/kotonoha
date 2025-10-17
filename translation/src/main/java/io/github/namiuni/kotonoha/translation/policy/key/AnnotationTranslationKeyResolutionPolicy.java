@@ -39,8 +39,14 @@ record AnnotationTranslationKeyResolutionPolicy() implements TranslationKeyResol
     }
 
     @Override
-    public String resolveKey(final InvocationContext context) {
-        return context.method().getAnnotation(Key.class).value();
+    public String resolveKey(final InvocationContext context) throws IllegalStateException {
+        final Key keyAnnotation = context.method().getAnnotation(Key.class);
+        if (keyAnnotation != null) {
+            return context.method().getAnnotation(Key.class).value();
+        }
+
+        final String message = "Missing annotation '@Key' on method '%s'".formatted(context.method().getName());
+        throw new IllegalStateException(message);
     }
 
     @Override

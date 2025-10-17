@@ -28,7 +28,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines the strategy for resolving the translation key from a proxy interface method invocation.
+ * Defines a strategy for resolving the translation key from a proxy interface method invocation.
  * <p>
  * The key is typically derived from an {@link Key} annotation on the method or a convention based on the method name.
  *

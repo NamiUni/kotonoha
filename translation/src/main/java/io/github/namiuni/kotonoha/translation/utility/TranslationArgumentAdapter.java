@@ -33,7 +33,7 @@ import net.kyori.adventure.text.TranslationArgument;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Utility for adapting values to {@link TranslationArgument}s using mapping functions corresponding to the specified type.
+ * Provides utilities for adapting values to {@link TranslationArgument}s using mapping functions corresponding to the specified type.
  *
  * @see TranslationArgument
  * @see io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy
@@ -46,7 +46,7 @@ import org.jspecify.annotations.NullMarked;
 public sealed interface TranslationArgumentAdapter permits TranslationArgumentAdapterImpl {
 
     /**
-     * Gets the standard {@code TranslationArgumentAdapter} instance with common type mappings.
+     * Returns the standard {@code TranslationArgumentAdapter} instance with common type mappings.
      *
      * <p>Supported types:</p>
      * <ul>
@@ -70,7 +70,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
      * <li>Character</li>
      * </ul>
      *
-     * @return the standard adapter
+     * @return the standard adapter instance with predefined mappings
      * @since 0.1.0
      */
     static TranslationArgumentAdapter standard() {
@@ -78,7 +78,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
     }
 
     /**
-     * Creates a new {@code Builder} for constructing a custom {@code TranslationArgumentAdapter}.
+     * Creates a new {@code Builder} instance for constructing a custom {@code TranslationArgumentAdapter}.
      *
      * @return a new Builder instance
      * @since 0.1.0
@@ -88,7 +88,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
     }
 
     /**
-     * Creates a new {@code Builder} initialized with the current adapter's mappings.
+     * Creates a new {@code Builder} instance for initialized with the current adapter's mappings.
      *
      * @return a new Builder
      * @since 0.1.0
@@ -96,7 +96,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
     TranslationArgumentAdapter.Builder toBuilder();
 
     /**
-     * Adapts the given value of the specified type into a {@link TranslationArgument}.
+     * Adapts the specified value into a {@link TranslationArgument} according to its declared type.
      *
      * @param type  the type of the value to adapt
      * @param value the value to adapt
@@ -110,13 +110,13 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
      * Checks if this adapter supports adaptation for the specified type.
      *
      * @param type the type of the value to adapt
-     * @return if an adapter is registered for the specified type, {@code true}
+     * @return {@code true} if an adapter is registered for the specified type; {@code false} otherwise
      * @since 0.1.0
      */
     boolean supports(Type type);
 
     /**
-     * Builder for creating immutable {@link TranslationArgumentAdapter} instances.
+     * A builder for creating immutable {@link TranslationArgumentAdapter} instances.
      *
      * @since 0.1.0
      */
@@ -125,9 +125,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         /**
          * Registers a custom function to adapt a value of the specified type token into a {@link TranslationArgument}.
          *
-         * @param <T>  the type of the value to adapt
-         * @param type the type token of the value type (for generic types)
-         * @param adapter   the function to perform the adaptation
+         * @param <T> the source value type
+         * @param type the {@link TypeToken} representing the value type (useful for generic types)
+         * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
          * @return this Builder instance
          * @since 0.1.0
          */
@@ -136,9 +136,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         /**
          * Registers a custom function to adapt a value of the specified class into a {@link TranslationArgument}.
          *
-         * @param <T>     the type of the value to adapt
+         * @param <T>     the source value type
          * @param type    the class of the value type
-         * @param adapter the function to perform the adaptation
+         * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
          * @return this Builder instance
          * @since 0.1.0
          */
@@ -147,9 +147,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         /**
          * Registers a custom function to adapt a value of the specified type token into a {@link ComponentLike} first, then wraps it as a {@link TranslationArgument}.
          *
-         * @param <T>     the type of the value to adapt
+         * @param <T>     the source value type
          * @param type    the type token of the value type (for generic types)
-         * @param adapter the function to adapt the value to {@code ComponentLike}
+         * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
          * @return this Builder instance
          * @since 0.1.0
          */
@@ -162,9 +162,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         /**
          * Registers a custom function to adapt a value of the specified class into a {@link ComponentLike} first, then wraps it as a {@link TranslationArgument}.
          *
-         * @param <T>     the type of the value to adapt
+         * @param <T>     the source value type
          * @param type    the class of the value type
-         * @param adapter the function to adapt the value to {@code ComponentLike}
+         * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
          * @return this Builder instance
          * @since 0.1.0
          */
@@ -177,9 +177,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         /**
          * Registers a custom function to adapt a value of the specified type token into a {@code String} first, then wraps it as a {@link TranslationArgument}.
          *
-         * @param <T>     the type of the value to adapt
+         * @param <T>     the source value type
          * @param type    the type token of the value type (for generic types)
-         * @param adapter the function to adapt the value to {@code String}
+         * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
          * @return this Builder instance
          * @since 0.1.0
          */
@@ -192,9 +192,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         /**
          * Registers a custom function to adapt a value of the specified class into a {@code String} first, then wraps it as a {@link TranslationArgument}.
          *
-         * @param <T>     the type of the value to adapt
+         * @param <T>     the source value type
          * @param type    the class of the value type
-         * @param adapter the function to adapt the value to {@code String}
+         * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
          * @return this Builder instance
          * @since 0.1.0
          */
@@ -205,7 +205,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         }
 
         /**
-         * Builds the immutable {@code TranslationArgumentAdapter}.
+         * Builds and returns an immutable {@code TranslationArgumentAdapter}.
          *
          * @return a new {@code TranslationArgumentAdapter}
          * @since 0.1.0

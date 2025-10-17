@@ -28,7 +28,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines the strategy for transforming the final {@link TranslatableComponent}
+ * Defines a strategy for transforming the final {@link TranslatableComponent}
  * into the required return type of the proxied interface method.
  * <p>
  * This policy handles cases where the method return type is not a component type

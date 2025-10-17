@@ -31,8 +31,8 @@ import org.jetbrains.annotations.UnknownNullability;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Utility for transforming a {@link Component} into a different object type
- * (e.g., transforming a Component to a {@code String}).
+ * Provides utilities for transforming a {@link Component} into a different object type
+ * (e.g., converting a component to a {@code String}).
  *
  * @see Component
  * @see io.github.namiuni.kotonoha.translation.policy.result.InvocationResultRenderingPolicy
@@ -55,7 +55,7 @@ public sealed interface ComponentTransformer permits ComponentTransformerImpl {
     }
 
     /**
-     * Transforms the given {@link Component} into the object required by the specified target type.
+     * Transforms the given {@link Component} into an object required by the specified target type.
      *
      * @param type      the type of the target value
      * @param component the {@code Component} to transform
@@ -70,13 +70,13 @@ public sealed interface ComponentTransformer permits ComponentTransformerImpl {
      * Checks if this transformer supports transformation to the specified type.
      *
      * @param type the type of the target value
-     * @return if a transformer is registered for the type, {@code true}
+     * @return {@code true} if a transformer is registered for the specified type; {@code false} otherwise
      * @since 0.1.0
      */
     boolean supports(Type type);
 
     /**
-     * Builder for creating immutable {@link ComponentTransformer} instances.
+     * A builder for creating immutable {@link ComponentTransformer} instances.
      *
      * @since 0.1.0
      */
@@ -105,7 +105,7 @@ public sealed interface ComponentTransformer permits ComponentTransformerImpl {
         <V> Builder register(TypeToken<V> type, Function<Component, @UnknownNullability V> transformer);
 
         /**
-         * Builds the immutable {@code ComponentTransformer}.
+         * Builds and returns an immutable {@code ComponentTransformer}.
          *
          * @return a new {@code ComponentTransformer}
          * @since 0.1.0

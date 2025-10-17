@@ -32,9 +32,14 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Represents the complete context of a proxy method invocation.
- * <p>
- * This interface provides access to the invoked method and the
- * arguments supplied during the call, allowing policies to process the invocation.
+ *
+ * <p>This interface provides access to the invoked {@link Method}
+ * and the arguments supplied during the call. It is typically used
+ * by translation policies to inspect or process invocation data
+ * when resolving translation keys or rendering results.</p>
+ *
+ * <p>The context is immutable and reflects the state of a single
+ * method invocation as seen by a proxy or handler.</p>
  *
  * @see java.lang.reflect.InvocationHandler
  * @see io.github.namiuni.kotonoha.translation.policy.key.TranslationKeyResolutionPolicy
@@ -45,6 +50,15 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public sealed interface InvocationContext permits InvocationContextImpl {
 
+    /**
+     * Creates a new {@code InvocationContext} for the given method and arguments.
+     *
+     * @param method the invoked method (must not be {@code null})
+     * @param args   the actual arguments passed to the method (must not be {@code null})
+     * @return a new invocation context instance
+     * @see java.lang.reflect.InvocationHandler
+     * @since 0.1.0
+     */
     @ApiStatus.Internal
     static InvocationContext of(final Method method, final @Nullable Object[] args) {
         Objects.requireNonNull(method, "method");
@@ -62,15 +76,16 @@ public sealed interface InvocationContext permits InvocationContextImpl {
     }
 
     /**
-     * Gets the method that was invoked.
+     * Returns the method that was invoked.
      *
-     * @return the method
+     * @return the invoked method
      * @since 0.1.0
      */
     Method method();
 
     /**
-     * Gets the arguments passed to the method invocation, wrapped as {@link InvocationArgument}s.
+     * Returns the arguments passed to the method invocation,
+     * wrapped as {@link InvocationArgument} objects.
      *
      * @return an array of invocation arguments
      * @see java.lang.reflect.InvocationHandler

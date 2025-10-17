@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
 public sealed interface InvocationArgument permits InvocationArgumentImpl {
 
     /**
-     * Gets the parameter associated with this argument.
+     * Returns the parameter associated with this argument.
      *
      * @return the parameter
      * @since 0.1.0
@@ -45,7 +45,7 @@ public sealed interface InvocationArgument permits InvocationArgumentImpl {
     Parameter parameter();
 
     /**
-     * Gets the runtime value of the argument.
+     * Returns the runtime value of the argument.
      *
      * @return the argument value, which may be null depending on the argument's nullability
      * @since 0.1.0
@@ -53,7 +53,7 @@ public sealed interface InvocationArgument permits InvocationArgumentImpl {
     @Nullable Object value();
 
     /**
-     * Gets the zero-based index of the parameter within the method's parameter list.
+     * Returns the zero-based index of the parameter within the method's parameter list.
      *
      * @return the index
      * @since 0.1.0
