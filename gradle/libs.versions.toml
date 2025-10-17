@@ -1,0 +1,43 @@
+[versions]
+# Tool
+checkstyle = "12.0.1"
+spotless = "8.0.0"
+maven-publish = "0.34.0"
+google-auto-service = "1.1.1"
+
+# Java
+jspecify = "1.0.0"
+geantyref = "2.0.1"
+adventure = "4.25.0"
+
+# Test
+junit = "6.0.0"
+google-compile-testing = "0.23.0"
+
+[libraries]
+# Tool
+spotless = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless"}
+maven-publish = { group = "com.vanniktech", name = "gradle-maven-publish-plugin", version.ref = "maven-publish"}
+google-auto-service = { group = "com.google.auto.service", name = "auto-service", version.ref = "google-auto-service" }
+google-auto-service-annotations = { group = "com.google.auto.service", name = "auto-service-annotations", version.ref = "google-auto-service" }
+
+# Java
+jspecify = { group = "org.jspecify", name = "jspecify", version.ref = "jspecify" }
+geantyref = { group = "io.leangen.geantyref", name = "geantyref", version.ref = "geantyref" }
+adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventure" }
+adventure-text-minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "adventure" }
+
+# Test
+junit-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
+junit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
+junit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit" }
+junit-platform = { group = "org.junit.platform", name = "junit-platform-launcher" }
+google-compile-testing = { group = "com.google.testing.compile", name = "compile-testing", version.ref = "google-compile-testing" }
+adventure-text-serializer-plain = { group = "net.kyori", name = "adventure-text-serializer-plain", version.ref = "adventure" }
+
+[bundles]
+testing = [
+    "junit-api",
+    "junit-engine",
+    "junit-params"
+]

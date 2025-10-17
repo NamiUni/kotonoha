@@ -1,0 +1,215 @@
+/*
+ * This file is part of kotonoha, licensed under the MIT License.
+ *
+ * Copyright (c) 2025 Namiu (Unitarou)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package io.github.namiuni.kotonoha.translation.utility;
+
+import io.leangen.geantyref.TypeToken;
+import java.lang.reflect.Type;
+import java.util.Objects;
+import java.util.function.Function;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentLike;
+import net.kyori.adventure.text.TranslationArgument;
+import org.jspecify.annotations.NullMarked;
+
+/**
+ * Utility for adapting values to {@link TranslationArgument}s using mapping functions corresponding to the specified type.
+ *
+ * @see TranslationArgument
+ * @see io.github.namiuni.kotonoha.translation.policy.argument.TranslationArgumentAdaptationPolicy
+ * @since 0.1.0
+ */
+// Design Note:
+// このクラスはリフレクション操作に慣れていない開発者でも手軽に扱えることを目的としているため、実装が複雑になるような拡張はしない。
+// 複雑な実装が必要な場合はTranslationArgumentAdaptationPolicyを実装する。
+@NullMarked
+public sealed interface TranslationArgumentAdapter permits TranslationArgumentAdapterImpl {
+
+    /**
+     * Gets the standard {@code TranslationArgumentAdapter} instance with common type mappings.
+     *
+     * <p>Supported types:</p>
+     * <ul>
+     * <li>TranslationArgumentLike</li>
+     * <li>TranslationArgument</li>
+     * <li>ComponentLike</li>
+     * <li>Component</li>
+     * <li>Number</li>
+     * <li>int</li>
+     * <li>Integer</li>
+     * <li>long</li>
+     * <li>Long</li>
+     * <li>float</li>
+     * <li>Float</li>
+     * <li>double</li>
+     * <li>Double</li>
+     * <li>boolean</li>
+     * <li>Boolean</li>
+     * <li>String</li>
+     * <li>char</li>
+     * <li>Character</li>
+     * </ul>
+     *
+     * @return the standard adapter
+     * @since 0.1.0
+     */
+    static TranslationArgumentAdapter standard() {
+        return StandardArgumentAdapter.STANDARD;
+    }
+
+    /**
+     * Creates a new {@code Builder} for constructing a custom {@code TranslationArgumentAdapter}.
+     *
+     * @return a new Builder instance
+     * @since 0.1.0
+     */
+    static TranslationArgumentAdapter.Builder builder() {
+        return new TranslationArgumentAdapterBuilder();
+    }
+
+    /**
+     * Creates a new {@code Builder} initialized with the current adapter's mappings.
+     *
+     * @return a new Builder
+     * @since 0.1.0
+     */
+    TranslationArgumentAdapter.Builder toBuilder();
+
+    /**
+     * Adapts the given value of the specified type into a {@link TranslationArgument}.
+     *
+     * @param type  the type of the value to adapt
+     * @param value the value to adapt
+     * @return the resolved {@link TranslationArgument}
+     * @throws IllegalArgumentException if no adapter is registered for the specified type
+     * @since 0.1.0
+     */
+    TranslationArgument adapt(Type type, Object value) throws IllegalArgumentException;
+
+    /**
+     * Checks if this adapter supports adaptation for the specified type.
+     *
+     * @param type the type of the value to adapt
+     * @return if an adapter is registered for the specified type, {@code true}
+     * @since 0.1.0
+     */
+    boolean supports(Type type);
+
+    /**
+     * Builder for creating immutable {@link TranslationArgumentAdapter} instances.
+     *
+     * @since 0.1.0
+     */
+    sealed interface Builder permits TranslationArgumentAdapterBuilder {
+
+        /**
+         * Registers a custom function to adapt a value of the specified type token into a {@link TranslationArgument}.
+         *
+         * @param <T>  the type of the value to adapt
+         * @param type the type token of the value type (for generic types)
+         * @param adapter   the function to perform the adaptation
+         * @return this Builder instance
+         * @since 0.1.0
+         */
+        <T> Builder argument(TypeToken<T> type, Function<T, TranslationArgument> adapter);
+
+        /**
+         * Registers a custom function to adapt a value of the specified class into a {@link TranslationArgument}.
+         *
+         * @param <T>     the type of the value to adapt
+         * @param type    the class of the value type
+         * @param adapter the function to perform the adaptation
+         * @return this Builder instance
+         * @since 0.1.0
+         */
+        <T> Builder argument(Class<T> type, Function<T, TranslationArgument> adapter);
+
+        /**
+         * Registers a custom function to adapt a value of the specified type token into a {@link ComponentLike} first, then wraps it as a {@link TranslationArgument}.
+         *
+         * @param <T>     the type of the value to adapt
+         * @param type    the type token of the value type (for generic types)
+         * @param adapter the function to adapt the value to {@code ComponentLike}
+         * @return this Builder instance
+         * @since 0.1.0
+         */
+        default <T> Builder component(final TypeToken<T> type, final Function<T, ComponentLike> adapter) {
+            Objects.requireNonNull(type, "type");
+            Objects.requireNonNull(adapter, "adapter");
+            return this.argument(type, adapter.andThen(TranslationArgument::component));
+        }
+
+        /**
+         * Registers a custom function to adapt a value of the specified class into a {@link ComponentLike} first, then wraps it as a {@link TranslationArgument}.
+         *
+         * @param <T>     the type of the value to adapt
+         * @param type    the class of the value type
+         * @param adapter the function to adapt the value to {@code ComponentLike}
+         * @return this Builder instance
+         * @since 0.1.0
+         */
+        default <T> Builder component(final Class<T> type, final Function<T, ComponentLike> adapter) {
+            Objects.requireNonNull(type, "type");
+            Objects.requireNonNull(adapter, "adapter");
+            return this.argument(type, adapter.andThen(TranslationArgument::component));
+        }
+
+        /**
+         * Registers a custom function to adapt a value of the specified type token into a {@code String} first, then wraps it as a {@link TranslationArgument}.
+         *
+         * @param <T>     the type of the value to adapt
+         * @param type    the type token of the value type (for generic types)
+         * @param adapter the function to adapt the value to {@code String}
+         * @return this Builder instance
+         * @since 0.1.0
+         */
+        default <T> Builder string(final TypeToken<T> type, final Function<T, String> adapter) {
+            Objects.requireNonNull(type, "type");
+            Objects.requireNonNull(adapter, "adapter");
+            return this.component(type, adapter.andThen(Component::text));
+        }
+
+        /**
+         * Registers a custom function to adapt a value of the specified class into a {@code String} first, then wraps it as a {@link TranslationArgument}.
+         *
+         * @param <T>     the type of the value to adapt
+         * @param type    the class of the value type
+         * @param adapter the function to adapt the value to {@code String}
+         * @return this Builder instance
+         * @since 0.1.0
+         */
+        default <T> Builder string(final Class<T> type, final Function<T, String> adapter) {
+            Objects.requireNonNull(type, "type");
+            Objects.requireNonNull(adapter, "adapter");
+            return this.component(type, adapter.andThen(Component::text));
+        }
+
+        /**
+         * Builds the immutable {@code TranslationArgumentAdapter}.
+         *
+         * @return a new {@code TranslationArgumentAdapter}
+         * @since 0.1.0
+         */
+        TranslationArgumentAdapter build();
+    }
+}
