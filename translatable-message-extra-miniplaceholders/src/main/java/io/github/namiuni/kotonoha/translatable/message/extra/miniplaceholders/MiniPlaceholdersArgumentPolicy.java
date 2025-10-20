@@ -1,6 +1,5 @@
 package io.github.namiuni.kotonoha.translatable.message.extra.miniplaceholders;
 
-import io.github.miniplaceholders.api.MiniPlaceholders;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
 import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import io.github.namiuni.kotonoha.translatable.message.policy.argument.CustomTranslationArgumentAdaptationPolicy;
@@ -9,11 +8,9 @@ import io.github.namiuni.kotonoha.translatable.message.policy.argument.tag.TagNa
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Objects;
 import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.minimessage.translation.Argument;
-import net.kyori.adventure.util.TriState;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -53,8 +50,6 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class MiniPlaceholdersArgumentPolicy implements CustomTranslationArgumentAdaptationPolicy {
 
-    private static TriState miniplaceholdersIsLoaded = TriState.NOT_SET;
-
     private final TranslationArgumentAdaptationPolicy minimessagePolicy;
 
     private MiniPlaceholdersArgumentPolicy(final TranslationArgumentAdaptationPolicy minimessagePolicy) {
@@ -82,24 +77,11 @@ public final class MiniPlaceholdersArgumentPolicy implements CustomTranslationAr
         return new MiniPlaceholdersArgumentPolicy(minimessagePolicy);
     }
 
-    private static boolean miniPlaceholdersLoaded() {
-        if (miniplaceholdersIsLoaded == TriState.NOT_SET) {
-            try {
-                final String name = MiniPlaceholders.class.getName();
-                Objects.requireNonNull(name);
-                miniplaceholdersIsLoaded = TriState.TRUE;
-            } catch (final NoClassDefFoundError error) {
-                miniplaceholdersIsLoaded = TriState.FALSE;
-            }
-        }
-        return miniplaceholdersIsLoaded == TriState.TRUE;
-    }
-
     @Override
     public ComponentLike[] adaptArguments(final InvocationContext context) throws IllegalArgumentException, NullPointerException {
         final ComponentLike[] standardArguments = this.minimessagePolicy.adaptArguments(context);
 
-        if (!miniPlaceholdersLoaded()) {
+        if (!MiniPlaceholdersIntegration.miniPlaceholdersLoaded()) {
             return standardArguments;
         }
 

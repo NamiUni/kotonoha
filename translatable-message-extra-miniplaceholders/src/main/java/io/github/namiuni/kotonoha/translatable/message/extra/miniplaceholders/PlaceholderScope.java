@@ -21,7 +21,7 @@ public enum PlaceholderScope {
      * @see MiniPlaceholders#globalPlaceholders()
      * @since 0.1.0
      */
-    GLOBAL(MiniPlaceholders::globalPlaceholders),
+    GLOBAL(MiniPlaceholdersIntegration::global),
 
     /**
      * Audience placeholders.
@@ -29,7 +29,7 @@ public enum PlaceholderScope {
      * @see MiniPlaceholders#audiencePlaceholders()
      * @since 0.1.0
      */
-    AUDIENCE(MiniPlaceholders::audiencePlaceholders),
+    AUDIENCE(MiniPlaceholdersIntegration::audience),
 
     /**
      * Audience and global placeholders.
@@ -37,7 +37,7 @@ public enum PlaceholderScope {
      * @see MiniPlaceholders#audienceGlobalPlaceholders()
      * @since 0.1.0
      */
-    AUDIENCE_GLOBAL(MiniPlaceholders::audienceGlobalPlaceholders),
+    AUDIENCE_GLOBAL(MiniPlaceholdersIntegration::audienceGlobal),
 
     /**
      * Relational placeholders.
@@ -45,7 +45,7 @@ public enum PlaceholderScope {
      * @see MiniPlaceholders#relationalPlaceholders()
      * @since 0.1.0
      */
-    RELATIONAL(MiniPlaceholders::relationalPlaceholders),
+    RELATIONAL(MiniPlaceholdersIntegration::relational),
 
     /**
      * Relational and global placeholders.
@@ -53,7 +53,7 @@ public enum PlaceholderScope {
      * @see MiniPlaceholders#relationalGlobalPlaceholders()
      * @since 0.1.0
      */
-    RELATIONAL_GLOBAL(MiniPlaceholders::relationalGlobalPlaceholders);
+    RELATIONAL_GLOBAL(MiniPlaceholdersIntegration::relationalGlobal);
 
     private final Supplier<TagResolver> supplier;
 

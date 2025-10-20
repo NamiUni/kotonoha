@@ -9,7 +9,7 @@ version = projectVersion
 
 dependencies {
     compileOnly(projects.kotonohaTranslatableMessage)
-    compileOnly(libs.mini.placeholders)
+    compileOnlyApi(libs.mini.placeholders)
 
     testImplementation(libs.adventure.text.minimessage)
     testImplementation(libs.mini.placeholders)
