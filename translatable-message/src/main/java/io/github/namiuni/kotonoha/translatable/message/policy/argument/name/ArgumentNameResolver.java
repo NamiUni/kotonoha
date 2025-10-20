@@ -53,9 +53,10 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
     /**
      * Returns a resolver that first attempts to retrieve the argument name from the {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
      * If no annotation exists, converted to snake case. It returns the name provided by the compiler for the parameter.
+     * <p>
+     * API Note: retrieving the actual parameter names requires that the declaring class be compiled with the {@code -parameters} compiler option
      *
      * @return an annotation or parameter name resolver
-     * @apiNote retrieving the actual parameter names requires that the declaring class be compiled with the {@code -parameters} compiler option.
      * @see net.kyori.adventure.text.minimessage.translation.Argument
      * @see io.github.namiuni.kotonoha.annotations.Name
      * @see Parameter#isNamePresent()
