@@ -55,7 +55,7 @@ public final class KotonohaMessages {
      * This is a convenience method for creating a proxy with a standard configuration
      * based on a common message formatting style (e.g., MiniMessage, MessageFormat).
      *
-     * <p><b>Example usage:</b></p>
+     * <p><b>Usage Example</b></p>
      * <pre>{@code
      * ExampleMessages messages = KotonohaMessages.of(ExampleMessages.class, FormatTypes.MESSAGE_FORMAT);
      * Component playerName = Component.text("Namiu");
@@ -85,7 +85,7 @@ public final class KotonohaMessages {
      * <p>
      * Handles method invocations according to the policies defined in the provided {@code config}.
      *
-     * <p><b>Example usage:</b></p>
+     * <p><b>Usage Example</b></p>
      * <pre>{@code
      * ExampleMessages messages = KotonohaMessages.of(ExampleMessages.class, yourConfig);
      * Component playerName = Component.text("Unitarou");

@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link ComponentLike} values used by a {@link net.kyori.adventure.text.TranslatableComponent}.
  * <p>
  * This policy is executed during the proxy method invocation to prepare the arguments
- * for the final translation component creation.
+ * for the translatable component creation.
  *
  * @see java.lang.reflect.InvocationHandler
  * @see net.kyori.adventure.text.TranslationArgument

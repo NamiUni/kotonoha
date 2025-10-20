@@ -32,42 +32,38 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 final class StandardArgumentAdapter {
 
-    static final TranslationArgumentAdapter STANDARD;
+    static final TranslationArgumentAdapter STANDARD = TranslationArgumentAdapter.builder()
 
-    static {
-        STANDARD = TranslationArgumentAdapter.builder()
+            // components
+            .argument(TranslationArgumentLike.class, TranslationArgumentLike::asTranslationArgument)
+            .argument(TranslationArgument.class, translationArgument -> translationArgument)
+            .component(ComponentLike.class, TranslationArgument::component)
+            .component(Component.class, TranslationArgument::component)
 
-                // components
-                .argument(TranslationArgumentLike.class, TranslationArgumentLike::asTranslationArgument)
-                .argument(TranslationArgument.class, translationArgument -> translationArgument)
-                .component(ComponentLike.class, TranslationArgument::component)
-                .component(Component.class, TranslationArgument::component)
+            // numbers
+            .argument(Number.class, TranslationArgument::numeric)
+            .argument(int.class, TranslationArgument::numeric)
+            .argument(Integer.class, TranslationArgument::numeric)
+            .argument(long.class, TranslationArgument::numeric)
+            .argument(Long.class, TranslationArgument::numeric)
+            .argument(float.class, TranslationArgument::numeric)
+            .argument(Float.class, TranslationArgument::numeric)
+            .argument(double.class, TranslationArgument::numeric)
+            .argument(Double.class, TranslationArgument::numeric)
 
-                // numbers
-                .argument(Number.class, TranslationArgument::numeric)
-                .argument(int.class, TranslationArgument::numeric)
-                .argument(Integer.class, TranslationArgument::numeric)
-                .argument(long.class, TranslationArgument::numeric)
-                .argument(Long.class, TranslationArgument::numeric)
-                .argument(float.class, TranslationArgument::numeric)
-                .argument(Float.class, TranslationArgument::numeric)
-                .argument(double.class, TranslationArgument::numeric)
-                .argument(Double.class, TranslationArgument::numeric)
+            // boolean
+            .argument(boolean.class, TranslationArgument::bool)
+            .argument(Boolean.class, TranslationArgument::bool)
 
-                // boolean
-                .argument(boolean.class, TranslationArgument::bool)
-                .argument(Boolean.class, TranslationArgument::bool)
+            // string
+            .string(String.class, string -> string)
 
-                // string
-                .string(String.class, string -> string)
+            // char
+            .component(char.class, Component::text)
+            .component(Character.class, Component::text)
 
-                // char
-                .component(char.class, Component::text)
-                .component(Character.class, Component::text)
-
-                // build
-                .build();
-    }
+            // build
+            .build();
 
     private StandardArgumentAdapter() {
     }
