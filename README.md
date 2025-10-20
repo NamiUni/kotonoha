@@ -11,8 +11,7 @@ Kotonoha simplifies the creation and management of multilingual messages by trea
 | **kotonoha-annotations**                                 | Common annotations shared across modules.                                                                                                                                                       |
 | **kotonoha-resourcebundle-generator-processor**          | An annotation processor that generates .properties resource bundles directly from annotated interfaces and includes them in the resulting artifact.                                             |
 | **kotonoha-translatable-message**                        | The core module providing reflection-based proxies. These proxies create TranslatableComponent instances from interface method calls, applying configurable format and transformation policies. |
-
-[//]: # (| **kotonoha-translatable-message-extra-miniplaceholders** | Extension module providing integration with [MiniPlaceholders]&#40;https://github.com/MiniPlaceholders&#41;.                                                                                            |)
+| **kotonoha-translatable-message-extra-miniplaceholders** | Extension module providing integration with [MiniPlaceholders](https://github.com/MiniPlaceholders).                                                                                            |
 
 ## Basic Examples
 
