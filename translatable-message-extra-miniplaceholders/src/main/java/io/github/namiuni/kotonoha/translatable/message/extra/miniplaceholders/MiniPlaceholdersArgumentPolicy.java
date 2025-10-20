@@ -5,7 +5,7 @@ import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext
 import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import io.github.namiuni.kotonoha.translatable.message.policy.argument.CustomTranslationArgumentAdaptationPolicy;
 import io.github.namiuni.kotonoha.translatable.message.policy.argument.TranslationArgumentAdaptationPolicy;
-import io.github.namiuni.kotonoha.translatable.message.policy.argument.name.ArgumentNameResolver;
+import io.github.namiuni.kotonoha.translatable.message.policy.argument.tag.TagNameResolver;
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -72,12 +72,12 @@ public final class MiniPlaceholdersArgumentPolicy implements CustomTranslationAr
      * @param nameResolver the resolver used to obtain the argument name from parameter
      * @return a miniplaceholders argument adaptation policy
      * @see io.github.miniplaceholders.api.MiniPlaceholders
-     * @see TranslationArgumentAdaptationPolicy#miniMessage(TranslationArgumentAdapter, ArgumentNameResolver)
+     * @see TranslationArgumentAdaptationPolicy#miniMessage(TranslationArgumentAdapter, TagNameResolver)
      * @see WithPlaceholders
      * @see PlaceholderScope
      * @since 0.1.0
      */
-    public static MiniPlaceholdersArgumentPolicy of(final TranslationArgumentAdapter argumentAdapter, final ArgumentNameResolver nameResolver) {
+    public static MiniPlaceholdersArgumentPolicy of(final TranslationArgumentAdapter argumentAdapter, final TagNameResolver nameResolver) {
         final TranslationArgumentAdaptationPolicy minimessagePolicy = TranslationArgumentAdaptationPolicy.miniMessage(argumentAdapter, nameResolver);
         return new MiniPlaceholdersArgumentPolicy(minimessagePolicy);
     }

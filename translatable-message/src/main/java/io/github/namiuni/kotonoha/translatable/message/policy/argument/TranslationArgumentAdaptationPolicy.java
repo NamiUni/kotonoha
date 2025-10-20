@@ -25,7 +25,7 @@ package io.github.namiuni.kotonoha.translatable.message.policy.argument;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
 import io.github.namiuni.kotonoha.translatable.message.policy.InvocationPolicy;
-import io.github.namiuni.kotonoha.translatable.message.policy.argument.name.ArgumentNameResolver;
+import io.github.namiuni.kotonoha.translatable.message.policy.argument.tag.TagNameResolver;
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -69,8 +69,8 @@ public sealed interface TranslationArgumentAdaptationPolicy extends InvocationPo
     }
 
     /**
-     * Returns a policy that adapts arguments based on their resolved name
-     * for use with {@link net.kyori.adventure.text.minimessage.MiniMessage} style translation strings.
+     * Returns a policy that adapts arguments based on their resolved tag name
+     * for use with {@link net.kyori.adventure.text.minimessage.MiniMessage} style texts.
      * <p>
      * This policy supports special parameter types for MiniMessage, which are directly
      * passed to the translation context without standard adaptation:
@@ -87,7 +87,7 @@ public sealed interface TranslationArgumentAdaptationPolicy extends InvocationPo
      * @see net.kyori.adventure.text.minimessage.translation.MiniMessageTranslator
      * @since 0.1.0
      */
-    static TranslationArgumentAdaptationPolicy miniMessage(final TranslationArgumentAdapter argumentAdapter, final ArgumentNameResolver nameResolver) {
+    static TranslationArgumentAdaptationPolicy miniMessage(final TranslationArgumentAdapter argumentAdapter, final TagNameResolver nameResolver) {
         Objects.requireNonNull(argumentAdapter, "argumentAdapter");
         Objects.requireNonNull(nameResolver, "nameResolver");
         return new MiniMessageTranslationArgumentAdaptationPolicy(argumentAdapter, nameResolver);
