@@ -1,5 +1,6 @@
 package io.github.namiuni.kotonoha.translatable.message.extra.miniplaceholders;
 
+import io.github.miniplaceholders.api.MiniPlaceholders;
 import java.util.function.Supplier;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.jspecify.annotations.NullMarked;
@@ -8,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
  * Defines the scope of MiniPlaceholders.
  *
  * @see WithPlaceholders
- * @see io.github.miniplaceholders.api.MiniPlaceholders
+ * @see MiniPlaceholders
  * @since 0.1.0
  */
 @NullMarked
@@ -17,42 +18,42 @@ public enum PlaceholderScope {
     /**
      * Global placeholders.
      *
-     * @see io.github.miniplaceholders.api.MiniPlaceholders#globalPlaceholders()
+     * @see MiniPlaceholders#globalPlaceholders()
      * @since 0.1.0
      */
-    GLOBAL(io.github.miniplaceholders.api.MiniPlaceholders::globalPlaceholders),
+    GLOBAL(MiniPlaceholders::globalPlaceholders),
 
     /**
      * Audience placeholders.
      *
-     * @see io.github.miniplaceholders.api.MiniPlaceholders#audiencePlaceholders()
+     * @see MiniPlaceholders#audiencePlaceholders()
      * @since 0.1.0
      */
-    AUDIENCE(io.github.miniplaceholders.api.MiniPlaceholders::audiencePlaceholders),
+    AUDIENCE(MiniPlaceholders::audiencePlaceholders),
 
     /**
      * Audience and global placeholders.
      *
-     * @see io.github.miniplaceholders.api.MiniPlaceholders#audienceGlobalPlaceholders()
+     * @see MiniPlaceholders#audienceGlobalPlaceholders()
      * @since 0.1.0
      */
-    AUDIENCE_GLOBAL(io.github.miniplaceholders.api.MiniPlaceholders::audienceGlobalPlaceholders),
+    AUDIENCE_GLOBAL(MiniPlaceholders::audienceGlobalPlaceholders),
 
     /**
      * Relational placeholders.
      *
-     * @see io.github.miniplaceholders.api.MiniPlaceholders#relationalPlaceholders()
+     * @see MiniPlaceholders#relationalPlaceholders()
      * @since 0.1.0
      */
-    RELATIONAL(io.github.miniplaceholders.api.MiniPlaceholders::relationalPlaceholders),
+    RELATIONAL(MiniPlaceholders::relationalPlaceholders),
 
     /**
      * Relational and global placeholders.
      *
-     * @see io.github.miniplaceholders.api.MiniPlaceholders#relationalGlobalPlaceholders()
+     * @see MiniPlaceholders#relationalGlobalPlaceholders()
      * @since 0.1.0
      */
-    RELATIONAL_GLOBAL(io.github.miniplaceholders.api.MiniPlaceholders::relationalGlobalPlaceholders);
+    RELATIONAL_GLOBAL(MiniPlaceholders::relationalGlobalPlaceholders);
 
     private final Supplier<TagResolver> supplier;
 
