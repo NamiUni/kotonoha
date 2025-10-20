@@ -2,7 +2,7 @@ package io.github.namiuni.kotonoha.translatable.message.extra.miniplaceholders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.argument.name.ArgumentNameResolver;
+import io.github.namiuni.kotonoha.translatable.message.policy.argument.tag.TagNameResolver;
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import java.lang.reflect.Method;
 import net.kyori.adventure.text.Component;
@@ -26,7 +26,7 @@ final class PlaceholderScopeArgumentPolicyTest {
 
         final MiniPlaceholdersArgumentPolicy policy = MiniPlaceholdersArgumentPolicy.of(
                 TranslationArgumentAdapter.standard(),
-                ArgumentNameResolver.annotationNameResolver()
+                TagNameResolver.annotationNameResolver()
         );
 
         final Method method = TestMessages.class.getMethod("testMessage");

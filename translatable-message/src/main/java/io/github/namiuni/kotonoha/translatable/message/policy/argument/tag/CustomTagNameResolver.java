@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.translatable.message.policy.argument.name;
+package io.github.namiuni.kotonoha.translatable.message.policy.argument.tag;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
@@ -37,5 +37,5 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 @ApiStatus.Experimental
-public non-sealed interface CustomArgumentNameResolver extends ArgumentNameResolver {
+public non-sealed interface CustomTagNameResolver extends TagNameResolver {
 }

@@ -26,7 +26,7 @@ package io.github.namiuni.kotonoha.translatable.message.policy.argument;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationArgument;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
 import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
-import io.github.namiuni.kotonoha.translatable.message.policy.argument.name.ArgumentNameResolver;
+import io.github.namiuni.kotonoha.translatable.message.policy.argument.tag.TagNameResolver;
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import io.leangen.geantyref.GenericTypeReflector;
 import java.lang.reflect.Method;
@@ -47,7 +47,7 @@ import org.jspecify.annotations.NullMarked;
 @SuppressWarnings("PatternValidation")
 record MiniMessageTranslationArgumentAdaptationPolicy(
         TranslationArgumentAdapter argumentAdapter,
-        ArgumentNameResolver nameResolver
+        TagNameResolver nameResolver
 ) implements TranslationArgumentAdaptationPolicy {
 
     @Override

@@ -25,42 +25,42 @@ package io.github.namiuni.kotonoha.translatable.message;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import io.github.namiuni.kotonoha.translatable.message.policy.argument.name.ArgumentNameResolver;
+import io.github.namiuni.kotonoha.translatable.message.policy.argument.tag.TagNameResolver;
 import org.jspecify.annotations.NullMarked;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @NullMarked
 @DisplayName("ArgumentNameResolver tests")
-final class ArgumentNameResolverTest {
+final class TagNameResolverTest {
 
     @Test
     @DisplayName("Should get annotation name resolver")
     void testAnnotationNameResolver() {
-        final ArgumentNameResolver resolver = ArgumentNameResolver.annotationNameResolver();
+        final TagNameResolver resolver = TagNameResolver.annotationNameResolver();
         assertNotNull(resolver);
     }
 
     @Test
     @DisplayName("Should get annotation or parameter name resolver")
     void testAnnotationOrParameterNameResolver() {
-        final ArgumentNameResolver resolver = ArgumentNameResolver.annotationOrParameterNameResolver();
+        final TagNameResolver resolver = TagNameResolver.annotationOrParameterNameResolver();
         assertNotNull(resolver);
     }
 
     @Test
     @DisplayName("Annotation name resolver should be singleton")
     void testAnnotationNameResolverSingleton() {
-        final ArgumentNameResolver resolver1 = ArgumentNameResolver.annotationNameResolver();
-        final ArgumentNameResolver resolver2 = ArgumentNameResolver.annotationNameResolver();
+        final TagNameResolver resolver1 = TagNameResolver.annotationNameResolver();
+        final TagNameResolver resolver2 = TagNameResolver.annotationNameResolver();
         assertSame(resolver1, resolver2);
     }
 
     @Test
     @DisplayName("Annotation or parameter name resolver should be singleton")
     void testAnnotationOrParameterNameResolverSingleton() {
-        final ArgumentNameResolver resolver1 = ArgumentNameResolver.annotationOrParameterNameResolver();
-        final ArgumentNameResolver resolver2 = ArgumentNameResolver.annotationOrParameterNameResolver();
+        final TagNameResolver resolver1 = TagNameResolver.annotationOrParameterNameResolver();
+        final TagNameResolver resolver2 = TagNameResolver.annotationOrParameterNameResolver();
         assertSame(resolver1, resolver2);
     }
 }

@@ -21,38 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.translatable.message.policy.argument.name;
+package io.github.namiuni.kotonoha.translatable.message.policy.argument.tag;
 
 import java.lang.reflect.Parameter;
 import net.kyori.adventure.text.minimessage.tag.TagPattern;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines a strategy for resolving the name of an argument used in
- * {@link net.kyori.adventure.text.minimessage.MiniMessage} formats that rely on argument naming.
+ * Defines a strategy for resolving the name of a {@link net.kyori.adventure.text.minimessage.tag.Tag} used in
+ * {@link net.kyori.adventure.text.minimessage.MiniMessage} formats.
  *
+ * @see io.github.namiuni.kotonoha.translatable.message.policy.argument.TranslationArgumentAdaptationPolicy
  * @see net.kyori.adventure.text.minimessage.MiniMessage
+ * @see net.kyori.adventure.text.minimessage.tag.Tag
  * @see net.kyori.adventure.text.minimessage.translation.Argument
  * @since 0.1.0
  */
 @NullMarked
-public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResolver, CustomArgumentNameResolver, AnnotationOrParameterNameArgumentNameResolver {
+public sealed interface TagNameResolver permits AnnotationTagNameResolver, CustomTagNameResolver, AnnotationOrParameterNameTagNameResolver {
 
     /**
-     * Returns a resolver that retrieves the argument name from {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
+     * Returns a resolver that retrieves the tag name from {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
      *
      * @return an annotation-based name resolver
      * @see net.kyori.adventure.text.minimessage.translation.Argument
      * @see io.github.namiuni.kotonoha.annotations.Name
      * @since 0.1.0
      */
-    static ArgumentNameResolver annotationNameResolver() {
-        return AnnotationArgumentNameResolver.INSTANCE;
+    static TagNameResolver annotationNameResolver() {
+        return AnnotationTagNameResolver.INSTANCE;
     }
 
     /**
-     * Returns a resolver that first attempts to retrieve the argument name from the {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
-     * If no annotation exists, converted to snake case. It returns the name provided by the compiler for the parameter.
+     * Returns a resolver that first attempts to retrieve the tag name from the {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
+     * If no annotation exists, parameter names converted to snake case.
      * <p>
      * API Note: retrieving the actual parameter names requires that the declaring class be compiled with the {@code -parameters} compiler option
      *
@@ -63,14 +65,12 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
      * @see Parameter#getName()
      * @since 0.1.0
      */
-    static ArgumentNameResolver annotationOrParameterNameResolver() {
-        return AnnotationOrParameterNameArgumentNameResolver.INSTANCE;
+    static TagNameResolver annotationOrParameterNameResolver() {
+        return AnnotationOrParameterNameTagNameResolver.INSTANCE;
     }
 
     /**
-     * Resolves and returns the name of a translation argument.
-     *
-     * <p>This is used as a tag key in a MiniMessage format string.</p>
+     * Resolves the tag name of a translation argument.
      *
      * @param parameter the parameter
      * @return the resolved argument name

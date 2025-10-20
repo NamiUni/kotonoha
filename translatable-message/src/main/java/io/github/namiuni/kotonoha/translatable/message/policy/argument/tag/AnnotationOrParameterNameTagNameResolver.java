@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.translatable.message.policy.argument.name;
+package io.github.namiuni.kotonoha.translatable.message.policy.argument.tag;
 
 import io.github.namiuni.kotonoha.annotations.Name;
 import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
@@ -30,19 +30,30 @@ import net.kyori.adventure.text.minimessage.tag.TagPattern;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-record AnnotationArgumentNameResolver() implements ArgumentNameResolver {
+record AnnotationOrParameterNameTagNameResolver() implements TagNameResolver {
 
-    static final AnnotationArgumentNameResolver INSTANCE = new AnnotationArgumentNameResolver();
+    static final AnnotationOrParameterNameTagNameResolver INSTANCE = new AnnotationOrParameterNameTagNameResolver();
 
     @Override
     @SuppressWarnings("PatternValidation")
     public @TagPattern String resolve(final Parameter parameter) {
-        final Name annotation = parameter.getAnnotation(Name.class);
-        return annotation.value();
+        if (parameter.isAnnotationPresent(Name.class)) {
+            return parameter.getAnnotation(Name.class).value();
+        }
+
+        return toSnakeCase(parameter.getName());
+    }
+
+    private static String toSnakeCase(final String name) {
+        return name.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
     }
 
     @Override
     public boolean supports(final Parameter parameter) throws KotonohaValidationException {
-        return parameter.isAnnotationPresent(Name.class);
+        if (parameter.isAnnotationPresent(Name.class)) {
+            return !parameter.getAnnotation(Name.class).value().isEmpty();
+        }
+
+        return parameter.isNamePresent();
     }
 }
