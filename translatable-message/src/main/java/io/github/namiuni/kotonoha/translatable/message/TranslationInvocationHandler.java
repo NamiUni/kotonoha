@@ -23,7 +23,7 @@
  */
 package io.github.namiuni.kotonoha.translatable.message;
 
-import io.github.namiuni.kotonoha.translatable.message.configuration.TranslationConfiguration;
+import io.github.namiuni.kotonoha.translatable.message.configuration.InvocationConfiguration;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
 import io.github.namiuni.kotonoha.translatable.message.policy.argument.TranslationArgumentAdaptationPolicy;
 import io.github.namiuni.kotonoha.translatable.message.policy.key.TranslationKeyResolutionPolicy;
@@ -47,7 +47,7 @@ final class TranslationInvocationHandler implements InvocationHandler {
     private final InvocationResultTransformationPolicy resultPolicy;
 
     TranslationInvocationHandler(
-            final TranslationConfiguration config
+            final InvocationConfiguration config
     ) {
         this.keyPolicy = config.keyPolicy();
         this.argumentPolicy = config.argumentPolicy();
@@ -72,7 +72,7 @@ final class TranslationInvocationHandler implements InvocationHandler {
         final ComponentLike[] arguments = this.argumentPolicy.adaptArguments(context); // Adapt arguments
         final TranslatableComponent component = Component.translatable(key, arguments); // Create translatable component
 
-        return this.resultPolicy.transformResult(component, context); // Render result
+        return this.resultPolicy.transformResult(component, context); // Transform result
     }
 
     private InvocationContext createContext(final Method method, final @Nullable Object @Nullable [] args) {

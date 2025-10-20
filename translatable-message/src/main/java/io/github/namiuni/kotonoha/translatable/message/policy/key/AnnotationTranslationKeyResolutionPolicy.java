@@ -25,7 +25,7 @@ package io.github.namiuni.kotonoha.translatable.message.policy.key;
 
 import io.github.namiuni.kotonoha.annotations.Key;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationValidationException;
+import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import java.lang.reflect.Method;
 import org.jspecify.annotations.NullMarked;
 
@@ -50,10 +50,10 @@ record AnnotationTranslationKeyResolutionPolicy() implements TranslationKeyResol
     }
 
     @Override
-    public void validate(final Method method) throws TranslationValidationException {
+    public void validate(final Method method) throws KotonohaValidationException {
         if (!method.isAnnotationPresent(Key.class)) {
             final String message = "Missing annotation '@Key' on method '%s'".formatted(method.getName());
-            throw new TranslationValidationException(message);
+            throw new KotonohaValidationException(message);
         }
     }
 }

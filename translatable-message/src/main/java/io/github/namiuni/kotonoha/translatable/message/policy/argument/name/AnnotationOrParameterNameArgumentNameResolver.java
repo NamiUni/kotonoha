@@ -24,7 +24,7 @@
 package io.github.namiuni.kotonoha.translatable.message.policy.argument.name;
 
 import io.github.namiuni.kotonoha.annotations.Name;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationValidationException;
+import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import java.lang.reflect.Parameter;
 import net.kyori.adventure.text.minimessage.tag.TagPattern;
 import org.jspecify.annotations.NullMarked;
@@ -32,11 +32,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 record AnnotationOrParameterNameArgumentNameResolver() implements ArgumentNameResolver {
 
-    static final AnnotationOrParameterNameArgumentNameResolver INSTANCE;
-
-    static {
-        INSTANCE = new AnnotationOrParameterNameArgumentNameResolver();
-    }
+    static final AnnotationOrParameterNameArgumentNameResolver INSTANCE = new AnnotationOrParameterNameArgumentNameResolver();
 
     @Override
     @SuppressWarnings("PatternValidation")
@@ -53,7 +49,7 @@ record AnnotationOrParameterNameArgumentNameResolver() implements ArgumentNameRe
     }
 
     @Override
-    public boolean supports(final Parameter parameter) throws TranslationValidationException {
+    public boolean supports(final Parameter parameter) throws KotonohaValidationException {
         if (parameter.isAnnotationPresent(Name.class)) {
             return !parameter.getAnnotation(Name.class).value().isEmpty();
         }

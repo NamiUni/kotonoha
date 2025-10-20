@@ -23,47 +23,33 @@
  */
 package io.github.namiuni.kotonoha.translatable.message.policy;
 
+import io.github.namiuni.kotonoha.translatable.message.KotonohaMessages;
+import io.github.namiuni.kotonoha.translatable.message.configuration.InvocationConfiguration;
+import java.lang.reflect.Method;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Signals that a translation validation process has failed.
+ * Defines the base contract for policies that govern the behavior of a translation proxy.
  * <p>
- * This exception is thrown when a translation does not meet the
- * required validation rules defined by a {@link TranslationPolicy}
- * or other translation-related components.
- * </p>
+ * Implementations of this interface define a specific strategy for handling
+ * a part of the translation process (e.g., key resolution, argument adaptation, result transformation).
+ * This policy is primarily used to validate whether a method is eligible for proxying.
  *
- * <p>
- * Typical causes include missing translation keys, invalid placeholders,
- * or violations of language consistency rules.
- * </p>
- *
- * @see TranslationPolicy
+ * @see InvocationConfiguration
  * @since 0.1.0
  */
 @NullMarked
-@SuppressWarnings("unused")
-public final class TranslationValidationException extends RuntimeException {
+@ApiStatus.Internal
+public interface InvocationPolicy {
 
     /**
-     * Creates a new exception indicating that a translation validation has failed.
+     * Validates whether the given method is compatible with this translation policy.
      *
-     * @param message a detail message explaining the validation failure
+     * @param method the method being validated
+     * @throws KotonohaValidationException if the method fails validation based on this policy’s requirements
+     * @see KotonohaMessages
      * @since 0.1.0
      */
-    public TranslationValidationException(final String message) {
-        super(message);
-    }
-
-    /**
-     * Creates a new exception indicating that a translation validation has failed,
-     * with an underlying cause.
-     *
-     * @param message a detail message explaining the validation failure
-     * @param cause the cause of this exception (may be {@code null})
-     * @since 0.1.0
-     */
-    public TranslationValidationException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
+    void validate(Method method) throws KotonohaValidationException;
 }

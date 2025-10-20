@@ -24,7 +24,7 @@
 package io.github.namiuni.kotonoha.translatable.message.policy.result;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationValidationException;
+import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import io.github.namiuni.kotonoha.translatable.message.utility.ComponentTransformer;
 import io.leangen.geantyref.GenericTypeReflector;
 import java.lang.reflect.Method;
@@ -52,7 +52,7 @@ record StandardInvocationResultTransformationPolicy(@Nullable ComponentTransform
     }
 
     @Override
-    public void validate(final Method method) throws TranslationValidationException {
+    public void validate(final Method method) throws KotonohaValidationException {
         if (this.transformer != null && this.transformer.supports(method.getGenericReturnType())) {
             return;
         }
@@ -63,6 +63,6 @@ record StandardInvocationResultTransformationPolicy(@Nullable ComponentTransform
 
         final String message = "Unsupported return type '%s' from method '%s'. " +
                 "Register a transformer for this type in ComponentTransformer";
-        throw new TranslationValidationException(message.formatted(method.getGenericReturnType(), method.getName()));
+        throw new KotonohaValidationException(message.formatted(method.getGenericReturnType(), method.getName()));
     }
 }

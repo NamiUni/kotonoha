@@ -31,7 +31,7 @@ import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Holds translation policies used when creating proxy instances in {@link KotonohaMessages}.
+ * Holds invocation policies used when creating proxy instances in {@link KotonohaMessages}.
  * It defines how translation keys, arguments, and results are handled during method invocation.
  *
  * @see KotonohaMessages
@@ -39,19 +39,19 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 @SuppressWarnings("unused")
-public sealed interface TranslationConfiguration permits TranslationConfigurationImpl {
+public sealed interface InvocationConfiguration permits InvocationConfigurationImpl {
 
     /**
-     * Creates a new translation configuration instance using the specified policies.
+     * Returns an invocation configuration using the specified policies.
      *
      * @param keyPolicy      the policy for resolving {@link net.kyori.adventure.text.TranslatableComponent} key during method invocation
      * @param argumentPolicy the policy for adapting {@link net.kyori.adventure.text.TranslatableComponent} arguments during method invocation
-     * @param resultPolicy   the policy for transforming {@link net.kyori.adventure.text.TranslatableComponent} generated during method invocation
-     * @return a new {@code TranslationConfiguration} instance using the specified policies
+     * @param resultPolicy   the policy for transforming {@link net.kyori.adventure.text.TranslatableComponent} created during method invocation
+     * @return a translation configuration
      * @see KotonohaMessages
      * @since 0.1.0
      */
-    static TranslationConfiguration of(
+    static InvocationConfiguration of(
             final TranslationKeyResolutionPolicy keyPolicy,
             final TranslationArgumentAdaptationPolicy argumentPolicy,
             final InvocationResultTransformationPolicy resultPolicy
@@ -60,11 +60,11 @@ public sealed interface TranslationConfiguration permits TranslationConfiguratio
         Objects.requireNonNull(argumentPolicy, "argumentPolicy");
         Objects.requireNonNull(resultPolicy, "resultPolicy");
 
-        return new TranslationConfigurationImpl(keyPolicy, argumentPolicy, resultPolicy);
+        return new InvocationConfigurationImpl(keyPolicy, argumentPolicy, resultPolicy);
     }
 
     /**
-     * Gets the policy for resolving translation key during method invocation.
+     * Returns a policy for resolving translation key during method invocation.
      *
      * @return the policy for resolving translation key
      * @since 0.1.0
@@ -72,7 +72,7 @@ public sealed interface TranslationConfiguration permits TranslationConfiguratio
     TranslationKeyResolutionPolicy keyPolicy();
 
     /**
-     * Gets the policy for adapting translation arguments during method invocation.
+     * Returns a policy for adapting translation arguments during method invocation.
      *
      * @return the policy for adapting translation arguments
      * @since 0.1.0
@@ -80,7 +80,7 @@ public sealed interface TranslationConfiguration permits TranslationConfiguratio
     TranslationArgumentAdaptationPolicy argumentPolicy();
 
     /**
-     * Gets the policy for transforming result components.
+     * Returns a policy for transforming result components during method invocation.
      *
      * @return the policy for transforming result components
      * @since 0.1.0
@@ -88,38 +88,38 @@ public sealed interface TranslationConfiguration permits TranslationConfiguratio
     InvocationResultTransformationPolicy resultPolicy();
 
     /**
-     * Gets a new translation configuration with the modified translation key resolution policy.
+     * Returns an invocation configuration with the modified translation key resolution policy.
      *
-     * @param keyPolicy the new policy for resolving translation key
-     * @return a new {@code TranslationConfiguration} with the specified policy
+     * @param keyPolicy the policy for resolving translation key
+     * @return an invocation configuration with the specified policy
      * @since 0.1.0
      */
-    default TranslationConfiguration withKeyPolicy(final TranslationKeyResolutionPolicy keyPolicy) {
+    default InvocationConfiguration withKeyPolicy(final TranslationKeyResolutionPolicy keyPolicy) {
         Objects.requireNonNull(keyPolicy, "keyPolicy");
-        return TranslationConfiguration.of(keyPolicy, this.argumentPolicy(), this.resultPolicy());
+        return InvocationConfiguration.of(keyPolicy, this.argumentPolicy(), this.resultPolicy());
     }
 
     /**
-     * Gets a new translation configuration with the modified translation arguments adapting policy.
+     * Returns an invocation configuration with the modified translation arguments adapting policy.
      *
-     * @param argumentPolicy the new policy for adapting translation arguments
-     * @return a new {@code TranslationConfiguration} with the specified policy
+     * @param argumentPolicy the policy for adapting translation arguments
+     * @return an invocation configuration with the specified policy
      * @since 0.1.0
      */
-    default TranslationConfiguration withArgumentPolicy(final TranslationArgumentAdaptationPolicy argumentPolicy) {
+    default InvocationConfiguration withArgumentPolicy(final TranslationArgumentAdaptationPolicy argumentPolicy) {
         Objects.requireNonNull(argumentPolicy, "argumentPolicy");
-        return TranslationConfiguration.of(this.keyPolicy(), argumentPolicy, this.resultPolicy());
+        return InvocationConfiguration.of(this.keyPolicy(), argumentPolicy, this.resultPolicy());
     }
 
     /**
-     * Gets a new translation configuration with the modified result transforming policy.
+     * Returns an invocation configuration with the modified result transforming policy.
      *
-     * @param resultPolicy the new policy for transforming result components
-     * @return a new {@code TranslationConfiguration} with the specified policy
+     * @param resultPolicy the policy for transforming result components
+     * @return an invocation configuration with the specified policy
      * @since 0.1.0
      */
-    default TranslationConfiguration withResultPolicy(final InvocationResultTransformationPolicy resultPolicy) {
+    default InvocationConfiguration withResultPolicy(final InvocationResultTransformationPolicy resultPolicy) {
         Objects.requireNonNull(resultPolicy, "resultPolicy");
-        return TranslationConfiguration.of(this.keyPolicy(), this.argumentPolicy(), resultPolicy);
+        return InvocationConfiguration.of(this.keyPolicy(), this.argumentPolicy(), resultPolicy);
     }
 }

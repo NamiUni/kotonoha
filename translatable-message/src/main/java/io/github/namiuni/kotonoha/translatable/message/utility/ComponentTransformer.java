@@ -46,9 +46,9 @@ import org.jspecify.annotations.NullMarked;
 public sealed interface ComponentTransformer permits ComponentTransformerImpl {
 
     /**
-     * Creates a new {@code Builder} for constructing a custom {@code ComponentTransformer}.
+     * Returns a new builder for constructing a component transformer.
      *
-     * @return a new Builder instance
+     * @return a new Builder
      * @since 0.1.0
      */
     static Builder builder() {
@@ -77,7 +77,7 @@ public sealed interface ComponentTransformer permits ComponentTransformerImpl {
     boolean supports(Type type);
 
     /**
-     * A builder for creating immutable {@link ComponentTransformer} instances.
+     * A builder for creating immutable component transformer.
      *
      * @since 0.1.0
      */
@@ -106,7 +106,7 @@ public sealed interface ComponentTransformer permits ComponentTransformerImpl {
         <V> Builder register(TypeToken<V> type, Function<Component, @UnknownNullability V> transformer);
 
         /**
-         * Builds and returns an immutable {@code ComponentTransformer}.
+         * Returns an immutable {@code ComponentTransformer}.
          *
          * @return a new {@code ComponentTransformer}
          * @since 0.1.0

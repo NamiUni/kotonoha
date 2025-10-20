@@ -67,7 +67,7 @@ ExampleMessages messages = KotonohaMessages.of(ExampleMessages.class, FormatType
 TranslatableComponent result = messages.welcomeMessage(player.name());
 ```
 
-This result component holds only the message key and argument information. When this message is sent to an audience, the translated message will be automatically resolved based on the audience's locale settings, provided that an appropriate `Translator` is registered with `GlobalTranslator`.
+This result component holds only the message key and argument information. When this message is sent to an audience, the translated message will be automatically rendered based on the audience's locale settings, provided that an appropriate `Translator` is registered with `GlobalTranslator`.
 
 More details on Adventure's localization can be found here:
 https://docs.papermc.io/adventure/localization/

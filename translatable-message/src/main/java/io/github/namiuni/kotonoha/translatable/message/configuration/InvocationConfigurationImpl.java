@@ -29,9 +29,9 @@ import io.github.namiuni.kotonoha.translatable.message.policy.result.InvocationR
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-record TranslationConfigurationImpl(
+record InvocationConfigurationImpl(
         TranslationKeyResolutionPolicy keyPolicy,
         TranslationArgumentAdaptationPolicy argumentPolicy,
         InvocationResultTransformationPolicy resultPolicy
-) implements TranslationConfiguration {
+) implements InvocationConfiguration {
 }

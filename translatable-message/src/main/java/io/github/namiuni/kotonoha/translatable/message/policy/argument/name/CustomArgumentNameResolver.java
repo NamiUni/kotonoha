@@ -29,9 +29,6 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Defines a strategy for resolving the name of an argument used in
  * {@link net.kyori.adventure.text.minimessage.MiniMessage} formats that rely on argument naming.
- * <p>
- * The resolved name is typically used as a tag key in
- * a {@link net.kyori.adventure.text.minimessage.MiniMessage} format string.
  *
  * @see net.kyori.adventure.text.minimessage.MiniMessage
  * @see net.kyori.adventure.text.minimessage.translation.Argument

@@ -35,7 +35,6 @@ import org.jspecify.annotations.NullMarked;
  * for the final translation component creation.
  *
  * @see java.lang.reflect.InvocationHandler
- * @see net.kyori.adventure.text.TranslatableComponent
  * @see net.kyori.adventure.text.TranslationArgument
  * @since 0.1.0
  */

@@ -23,8 +23,8 @@
  */
 package io.github.namiuni.kotonoha.translatable.message;
 
-import io.github.namiuni.kotonoha.translatable.message.configuration.TranslationConfiguration;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationValidationException;
+import io.github.namiuni.kotonoha.translatable.message.configuration.InvocationConfiguration;
+import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import org.jspecify.annotations.NullMarked;
@@ -35,7 +35,7 @@ final class ProxyFactory {
     private ProxyFactory() {
     }
 
-    static <I> I createProxy(final Class<I> proxiedType, final TranslationConfiguration config) throws IllegalArgumentException {
+    static <I> I createProxy(final Class<I> proxiedType, final InvocationConfiguration config) throws IllegalArgumentException {
 
         if (!proxiedType.isInterface()) {
             throw new IllegalArgumentException("The specified class is not an interface.");
@@ -69,7 +69,7 @@ final class ProxyFactory {
         return proxiedType.cast(proxyInstance);
     }
 
-    private static void validate(final TranslationConfiguration config, final Method method) throws TranslationValidationException {
+    private static void validate(final InvocationConfiguration config, final Method method) throws KotonohaValidationException {
         config.keyPolicy().validate(method);
         config.argumentPolicy().validate(method);
         config.resultPolicy().validate(method);

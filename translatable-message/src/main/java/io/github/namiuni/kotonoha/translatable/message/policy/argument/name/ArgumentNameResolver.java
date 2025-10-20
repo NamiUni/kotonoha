@@ -30,25 +30,19 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Defines a strategy for resolving the name of an argument used in
  * {@link net.kyori.adventure.text.minimessage.MiniMessage} formats that rely on argument naming.
- * <p>
- * The resolved name is typically used as a tag key in
- * a {@link net.kyori.adventure.text.minimessage.MiniMessage} format string.
  *
  * @see net.kyori.adventure.text.minimessage.MiniMessage
  * @see net.kyori.adventure.text.minimessage.translation.Argument
- * @see net.kyori.adventure.text.minimessage.tag.Tag
  * @since 0.1.0
  */
 @NullMarked
 public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResolver, CustomArgumentNameResolver, AnnotationOrParameterNameArgumentNameResolver {
 
     /**
-     * Returns a resolver that retrieves the argument name exclusively from {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
+     * Returns a resolver that retrieves the argument name from {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
      *
      * @return an annotation-based name resolver
-     * @see net.kyori.adventure.text.minimessage.MiniMessage
      * @see net.kyori.adventure.text.minimessage.translation.Argument
-     * @see net.kyori.adventure.text.minimessage.tag.Tag
      * @see io.github.namiuni.kotonoha.annotations.Name
      * @since 0.1.0
      */
@@ -58,14 +52,14 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
 
     /**
      * Returns a resolver that first attempts to retrieve the argument name from the {@link io.github.namiuni.kotonoha.annotations.Name} annotation.
-     * If no annotation exists, it returns the name provided by the compiler for the parameter, converted to snake case.
+     * If no annotation exists, converted to snake case. It returns the name provided by the compiler for the parameter.
      *
      * @return an annotation or parameter name resolver
-     * @see net.kyori.adventure.text.minimessage.MiniMessage
+     * @apiNote retrieving the actual parameter names requires that the declaring class be compiled with the {@code -parameters} compiler option.
      * @see net.kyori.adventure.text.minimessage.translation.Argument
-     * @see net.kyori.adventure.text.minimessage.tag.Tag
      * @see io.github.namiuni.kotonoha.annotations.Name
-     * @see java.lang.reflect.Parameter
+     * @see Parameter#isNamePresent()
+     * @see Parameter#getName()
      * @since 0.1.0
      */
     static ArgumentNameResolver annotationOrParameterNameResolver() {
@@ -73,16 +67,13 @@ public sealed interface ArgumentNameResolver permits AnnotationArgumentNameResol
     }
 
     /**
-     * Resolves and returns the name of a translation argument,
-     * typically used as a tag key in a MiniMessage format string.
-     * <p>
-     * The returned string is typically expected to be a valid tag key pattern for MiniMessage.
+     * Resolves and returns the name of a translation argument.
+     *
+     * <p>This is used as a tag key in a MiniMessage format string.</p>
      *
      * @param parameter the parameter
-     * @return the resolved argument name (non-null)
-     * @see net.kyori.adventure.text.minimessage.MiniMessage
+     * @return the resolved argument name
      * @see net.kyori.adventure.text.minimessage.translation.Argument
-     * @see net.kyori.adventure.text.minimessage.tag.Tag
      * @see net.kyori.adventure.text.TranslatableComponent
      * @since 0.1.0
      */

@@ -33,8 +33,8 @@ import org.jspecify.annotations.NullMarked;
 record MessageFormatType() implements FormatType {
 
     @Override
-    public TranslationConfiguration configure() {
-        return TranslationConfiguration.of(
+    public InvocationConfiguration configure() {
+        return InvocationConfiguration.of(
                 TranslationKeyResolutionPolicy.annotationKeyResolutionPolicy(),
                 TranslationArgumentAdaptationPolicy.messageFormat(TranslationArgumentAdapter.standard()),
                 InvocationResultTransformationPolicy.of()

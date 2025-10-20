@@ -23,33 +23,42 @@
  */
 package io.github.namiuni.kotonoha.translatable.message.policy;
 
-import io.github.namiuni.kotonoha.translatable.message.KotonohaMessages;
-import io.github.namiuni.kotonoha.translatable.message.configuration.TranslationConfiguration;
-import java.lang.reflect.Method;
-import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Defines the base contract for policies that govern the behavior of a translation proxy.
+ * Signals that a validation process has failed.
  * <p>
- * Implementations of this interface define a specific strategy for handling
- * a part of the translation process (e.g., key resolution, argument adaptation, result transformation).
- * This policy is primarily used to validate whether a method is eligible for proxying.
+ * This exception is thrown when a method does not meet the
+ * required validation rules defined by a {@link InvocationPolicy}
+ * or other translation-related components.
+ * </p>
  *
- * @see TranslationConfiguration
+ * @see InvocationPolicy
  * @since 0.1.0
  */
 @NullMarked
-@ApiStatus.Internal
-public interface TranslationPolicy {
+@SuppressWarnings("unused")
+public final class KotonohaValidationException extends RuntimeException {
 
     /**
-     * Validates whether the given method is compatible with this translation policy.
+     * Creates a new exception indicating that a validation has failed.
      *
-     * @param method the method being validated
-     * @throws TranslationValidationException if the method fails validation based on this policy’s requirements
-     * @see KotonohaMessages
+     * @param message a detail message explaining the validation failure
      * @since 0.1.0
      */
-    void validate(Method method) throws TranslationValidationException;
+    public KotonohaValidationException(final String message) {
+        super(message);
+    }
+
+    /**
+     * Creates a new exception indicating that a validation has failed,
+     * with an underlying cause.
+     *
+     * @param message a detail message explaining the validation failure
+     * @param cause the cause of this exception
+     * @since 0.1.0
+     */
+    public KotonohaValidationException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
 }

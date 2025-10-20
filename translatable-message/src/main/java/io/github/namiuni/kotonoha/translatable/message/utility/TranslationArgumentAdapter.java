@@ -79,9 +79,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
     }
 
     /**
-     * Creates a new {@code Builder} instance for constructing a custom {@code TranslationArgumentAdapter}.
+     * Returns a new builder for constructing a translation argument adapter.
      *
-     * @return a new Builder instance
+     * @return a new builder
      * @since 0.1.0
      */
     static TranslationArgumentAdapter.Builder builder() {
@@ -89,9 +89,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
     }
 
     /**
-     * Creates a new {@code Builder} instance for initialized with the current adapter's mappings.
+     * Returns a new builder for initialized with the current adapter's mappings.
      *
-     * @return a new Builder
+     * @return a new builder
      * @since 0.1.0
      */
     TranslationArgumentAdapter.Builder toBuilder();
@@ -117,7 +117,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
     boolean supports(Type type);
 
     /**
-     * A builder for creating immutable {@link TranslationArgumentAdapter} instances.
+     * A builder for creating immutable translation argument adapter.
      *
      * @since 0.1.0
      */
@@ -129,7 +129,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
          * @param <T> the source value type
          * @param type the {@link TypeToken} representing the value type (useful for generic types)
          * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
-         * @return this Builder instance
+         * @return this builder
          * @since 0.1.0
          */
         <T> Builder argument(TypeToken<T> type, Function<T, TranslationArgument> adapter);
@@ -140,7 +140,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
          * @param <T>     the source value type
          * @param type    the class of the value type
          * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
-         * @return this Builder instance
+         * @return this builder
          * @since 0.1.0
          */
         <T> Builder argument(Class<T> type, Function<T, TranslationArgument> adapter);
@@ -151,7 +151,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
          * @param <T>     the source value type
          * @param type    the type token of the value type (for generic types)
          * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
-         * @return this Builder instance
+         * @return this builder
          * @since 0.1.0
          */
         default <T> Builder component(final TypeToken<T> type, final Function<T, ComponentLike> adapter) {
@@ -166,7 +166,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
          * @param <T>     the source value type
          * @param type    the class of the value type
          * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
-         * @return this Builder instance
+         * @return this builder
          * @since 0.1.0
          */
         default <T> Builder component(final Class<T> type, final Function<T, ComponentLike> adapter) {
@@ -181,7 +181,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
          * @param <T>     the source value type
          * @param type    the type token of the value type (for generic types)
          * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
-         * @return this Builder instance
+         * @return this builder
          * @since 0.1.0
          */
         default <T> Builder string(final TypeToken<T> type, final Function<T, String> adapter) {
@@ -196,7 +196,7 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
          * @param <T>     the source value type
          * @param type    the class of the value type
          * @param adapter the mapping function that converts the value into a {@link TranslationArgument}
-         * @return this Builder instance
+         * @return this builder
          * @since 0.1.0
          */
         default <T> Builder string(final Class<T> type, final Function<T, String> adapter) {
@@ -206,9 +206,9 @@ public sealed interface TranslationArgumentAdapter permits TranslationArgumentAd
         }
 
         /**
-         * Builds and returns an immutable {@code TranslationArgumentAdapter}.
+         * Returns an immutable translation argument adapter.
          *
-         * @return a new {@code TranslationArgumentAdapter}
+         * @return a translation argument adapter
          * @since 0.1.0
          */
         TranslationArgumentAdapter build();

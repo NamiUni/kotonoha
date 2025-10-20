@@ -24,7 +24,7 @@
 package io.github.namiuni.kotonoha.translatable.message.policy.result;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationPolicy;
+import io.github.namiuni.kotonoha.translatable.message.policy.InvocationPolicy;
 import io.github.namiuni.kotonoha.translatable.message.utility.ComponentTransformer;
 import java.util.Objects;
 import net.kyori.adventure.text.TranslatableComponent;
@@ -34,23 +34,19 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Defines the strategy for transforming the final {@link TranslatableComponent}
  * into the required return type of the proxied interface method.
- * <p>
- * This policy handles cases where the method return type is not a component type
- * but a string, an optional, or another wrapper. If no specific transformation is applied,
- * the policy is expected to return the {@link TranslatableComponent} itself, provided the return type allows it.
  *
  * @see TranslatableComponent
  * @see java.lang.reflect.InvocationHandler
  * @since 0.1.0
  */
 @NullMarked
-public sealed interface InvocationResultTransformationPolicy extends TranslationPolicy permits CustomInvocationResultTransformationPolicy, NoOperationResultTransformationPolicy, StandardInvocationResultTransformationPolicy {
+public sealed interface InvocationResultTransformationPolicy extends InvocationPolicy permits CustomInvocationResultTransformationPolicy, NoOperationResultTransformationPolicy, StandardInvocationResultTransformationPolicy {
 
     /**
-     * Creates a standard policy that uses the specified transformer to handle the {@link TranslatableComponent} transformation.
+     * Returns a standard policy that uses the specified transformer to handle the {@link TranslatableComponent} transformation.
      *
-     * @param transformer the transformer to use for converting the {@link TranslatableComponent} to the return type
-     * @return a new InvocationResultTransformationPolicy instance
+     * @param transformer the transformer to use for transforming the {@link TranslatableComponent} to the return type
+     * @return a InvocationResultTransformationPolicy instance
      * @since 0.1.0
      */
     static InvocationResultTransformationPolicy of(final ComponentTransformer transformer) {

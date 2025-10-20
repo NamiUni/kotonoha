@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
  * Represents the complete context of a proxy method invocation.
  *
  * <p>This interface provides access to the invoked {@link Method}
- * and the arguments supplied during the call. It is typically used
+ * and the arguments supplied during the call. It is used
  * by translation policies to inspect or process invocation data
  * when resolving translation keys or rendering results.</p>
  *
@@ -54,11 +54,11 @@ import org.jspecify.annotations.Nullable;
 public sealed interface InvocationContext permits InvocationContextImpl {
 
     /**
-     * Creates a new {@code InvocationContext} for the given method and arguments.
+     * Returns an invocation context for the given method and arguments.
      *
      * @param method the invoked method (must not be {@code null})
      * @param args   the actual arguments passed to the method (must not be {@code null})
-     * @return a new invocation context instance
+     * @return an invocation context
      * @see java.lang.reflect.InvocationHandler
      * @since 0.1.0
      */

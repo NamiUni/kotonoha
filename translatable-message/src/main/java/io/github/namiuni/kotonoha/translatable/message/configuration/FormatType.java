@@ -23,7 +23,6 @@
  */
 package io.github.namiuni.kotonoha.translatable.message.configuration;
 
-import io.github.namiuni.kotonoha.translatable.message.KotonohaMessages;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -35,11 +34,11 @@ import org.jspecify.annotations.NullMarked;
 public sealed interface FormatType permits MessageFormatType, MiniMessageType {
 
     /**
-     * Gets the default translation configuration for configuring the translation of this message format type.
+     * Returns a default invocation configuration for configuring the invocation of this message format type.
      *
-     * @return the default translation configuration
-     * @see KotonohaMessages
+     * @return the default invocation configuration
+     * @see io.github.namiuni.kotonoha.translatable.message.KotonohaMessages
      * @since 0.1.0
      */
-    TranslationConfiguration configure();
+    InvocationConfiguration configure();
 }

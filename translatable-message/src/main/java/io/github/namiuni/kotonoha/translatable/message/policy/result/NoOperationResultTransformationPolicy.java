@@ -24,7 +24,7 @@
 package io.github.namiuni.kotonoha.translatable.message.policy.result;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationValidationException;
+import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import io.leangen.geantyref.GenericTypeReflector;
 import java.lang.reflect.Method;
 import net.kyori.adventure.text.TranslatableComponent;
@@ -42,12 +42,12 @@ record NoOperationResultTransformationPolicy() implements InvocationResultTransf
     }
 
     @Override
-    public void validate(final Method method) throws TranslationValidationException {
+    public void validate(final Method method) throws KotonohaValidationException {
         if (GenericTypeReflector.isSuperType(method.getGenericReturnType(), TranslatableComponent.class)) {
             return;
         }
 
         final String message = "The return type '%s' of the method '%s' is not a supertype of 'TranslatableComponent'";
-        throw new TranslationValidationException(message.formatted(method.getGenericReturnType(), method.getName()));
+        throw new KotonohaValidationException(message.formatted(method.getGenericReturnType(), method.getName()));
     }
 }

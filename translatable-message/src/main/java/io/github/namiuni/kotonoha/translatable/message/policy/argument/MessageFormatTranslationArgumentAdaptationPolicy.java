@@ -25,7 +25,7 @@ package io.github.namiuni.kotonoha.translatable.message.policy.argument;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationArgument;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationValidationException;
+import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import io.leangen.geantyref.GenericTypeReflector;
 import java.lang.reflect.Method;
@@ -64,7 +64,7 @@ record MessageFormatTranslationArgumentAdaptationPolicy(TranslationArgumentAdapt
     }
 
     @Override
-    public void validate(final Method method) throws TranslationValidationException {
+    public void validate(final Method method) throws KotonohaValidationException {
         final Parameter[] parameters = method.getParameters();
         for (int i = 0; i < parameters.length; i++) {
             final Parameter parameter = parameters[i];
@@ -77,7 +77,7 @@ record MessageFormatTranslationArgumentAdaptationPolicy(TranslationArgumentAdapt
                         i,
                         method.getName()
                 );
-                throw new TranslationValidationException(formatted);
+                throw new KotonohaValidationException(formatted);
             }
         }
     }

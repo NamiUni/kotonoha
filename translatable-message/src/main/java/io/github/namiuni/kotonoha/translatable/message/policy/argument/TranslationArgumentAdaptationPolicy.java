@@ -24,7 +24,7 @@
 package io.github.namiuni.kotonoha.translatable.message.policy.argument;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationPolicy;
+import io.github.namiuni.kotonoha.translatable.message.policy.InvocationPolicy;
 import io.github.namiuni.kotonoha.translatable.message.policy.argument.name.ArgumentNameResolver;
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import java.lang.reflect.Method;
@@ -42,25 +42,24 @@ import org.jspecify.annotations.NullMarked;
  * for the final translation component creation.
  *
  * @see java.lang.reflect.InvocationHandler
- * @see net.kyori.adventure.text.TranslatableComponent
  * @see net.kyori.adventure.text.TranslationArgument
  * @since 0.1.0
  */
 @NullMarked
 @ApiStatus.Experimental
-public sealed interface TranslationArgumentAdaptationPolicy extends TranslationPolicy permits CustomTranslationArgumentAdaptationPolicy, MessageFormatTranslationArgumentAdaptationPolicy, MiniMessageTranslationArgumentAdaptationPolicy {
+public sealed interface TranslationArgumentAdaptationPolicy extends InvocationPolicy permits CustomTranslationArgumentAdaptationPolicy, MessageFormatTranslationArgumentAdaptationPolicy, MiniMessageTranslationArgumentAdaptationPolicy {
 
     /**
-     * An empty {@code ComponentLike} array returned when the invoked method has no arguments.
+     * An empty {@link ComponentLike} array returned when the invoked method has no arguments.
      */
     ComponentLike[] EMPTY_COMPONENT_LIKE_ARRAY = new ComponentLike[0];
 
     /**
-     * Creates a policy that adapts arguments based on their positional order
+     * Returns a policy that adapts arguments based on their positional order
      * for use with {@link java.text.MessageFormat} style translation strings.
      *
-     * @param argumentAdapter the adapter used to convert raw Java types to {@link net.kyori.adventure.text.TranslationArgument} objects
-     * @return a policy for MessageFormat argument handling
+     * @param argumentAdapter the adapter used to transform method argument types to translation arguments
+     * @return a policy for {@code MessageFormat} argument handling
      * @see java.text.MessageFormat
      * @since 0.1.0
      */
@@ -70,7 +69,7 @@ public sealed interface TranslationArgumentAdaptationPolicy extends TranslationP
     }
 
     /**
-     * Creates a policy that adapts arguments based on their resolved name
+     * Returns a policy that adapts arguments based on their resolved name
      * for use with {@link net.kyori.adventure.text.minimessage.MiniMessage} style translation strings.
      * <p>
      * This policy supports special parameter types for MiniMessage, which are directly
@@ -81,9 +80,9 @@ public sealed interface TranslationArgumentAdaptationPolicy extends TranslationP
      * <li>A single argument of type {@link Pointered} is used as the target for context-aware translation.</li>
      * </ul>
      *
-     * @param argumentAdapter the adapter used to convert raw Java types to {@link net.kyori.adventure.text.TranslationArgument} objects.
+     * @param argumentAdapter the adapter used to transform method argument types to translation arguments
      * @param nameResolver    the resolver used to obtain the argument name from parameter.
-     * @return a policy for MiniMessage argument handling.
+     * @return a policy for {@code MiniMessage} argument handling.
      * @see net.kyori.adventure.text.minimessage.MiniMessage
      * @see net.kyori.adventure.text.minimessage.translation.MiniMessageTranslator
      * @since 0.1.0
@@ -99,7 +98,7 @@ public sealed interface TranslationArgumentAdaptationPolicy extends TranslationP
      * {@link ComponentLike} objects suitable for a {@link net.kyori.adventure.text.TranslatableComponent}.
      *
      * @param context the invocation context containing the method and its arguments
-     * @return an array of ComponentLike values representing the adapted translation arguments
+     * @return an array of {@link ComponentLike} values representing the adapted translation arguments
      * @throws IllegalArgumentException if an argument value is invalid or cannot be adapted based on the policy rules
      * @throws NullPointerException     if an argument in the method is null
      * @see java.lang.reflect.InvocationHandler#invoke(Object, Method, Object[])

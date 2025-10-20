@@ -34,8 +34,8 @@ import org.jspecify.annotations.NullMarked;
 record MiniMessageType() implements FormatType {
 
     @Override
-    public TranslationConfiguration configure() {
-        return TranslationConfiguration.of(
+    public InvocationConfiguration configure() {
+        return InvocationConfiguration.of(
                 TranslationKeyResolutionPolicy.annotationKeyResolutionPolicy(),
                 TranslationArgumentAdaptationPolicy.miniMessage(TranslationArgumentAdapter.standard(), ArgumentNameResolver.annotationNameResolver()),
                 InvocationResultTransformationPolicy.of()

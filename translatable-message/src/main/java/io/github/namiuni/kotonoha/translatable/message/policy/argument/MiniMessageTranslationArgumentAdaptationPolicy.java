@@ -25,7 +25,7 @@ package io.github.namiuni.kotonoha.translatable.message.policy.argument;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationArgument;
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationValidationException;
+import io.github.namiuni.kotonoha.translatable.message.policy.KotonohaValidationException;
 import io.github.namiuni.kotonoha.translatable.message.policy.argument.name.ArgumentNameResolver;
 import io.github.namiuni.kotonoha.translatable.message.utility.TranslationArgumentAdapter;
 import io.leangen.geantyref.GenericTypeReflector;
@@ -93,7 +93,7 @@ record MiniMessageTranslationArgumentAdaptationPolicy(
     }
 
     @Override
-    public void validate(final Method method) throws TranslationValidationException {
+    public void validate(final Method method) throws KotonohaValidationException {
 
         boolean hasTarget = false;
         final Parameter[] parameters = method.getParameters();
@@ -118,7 +118,7 @@ record MiniMessageTranslationArgumentAdaptationPolicy(
             if (parameterizedType.equals(Pointered.class)) {
                 if (hasTarget) {
                     final String message = "Multiple target arguments have been set!";
-                    throw new TranslationValidationException(message);
+                    throw new KotonohaValidationException(message);
                 }
 
                 hasTarget = true;
@@ -132,7 +132,7 @@ record MiniMessageTranslationArgumentAdaptationPolicy(
                     i,
                     method.getName()
             );
-            throw new TranslationValidationException(formatted);
+            throw new KotonohaValidationException(formatted);
         }
     }
 }

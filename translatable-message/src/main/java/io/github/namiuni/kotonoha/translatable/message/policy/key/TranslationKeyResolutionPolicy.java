@@ -24,21 +24,18 @@
 package io.github.namiuni.kotonoha.translatable.message.policy.key;
 
 import io.github.namiuni.kotonoha.translatable.message.context.InvocationContext;
-import io.github.namiuni.kotonoha.translatable.message.policy.TranslationPolicy;
+import io.github.namiuni.kotonoha.translatable.message.policy.InvocationPolicy;
 import org.jspecify.annotations.NullMarked;
 
 /**
  * Defines a strategy for resolving the translation key from a proxy interface method invocation.
- * <p>
- * The key is typically derived from an {@link io.github.namiuni.kotonoha.annotations.Key} annotation on the method,
- * or, if absent, from the method name following a predefined naming convention.
  *
  * @see java.lang.reflect.InvocationHandler
  * @see net.kyori.adventure.text.TranslatableComponent
  * @since 0.1.0
  */
 @NullMarked
-public sealed interface TranslationKeyResolutionPolicy extends TranslationPolicy permits CustomTranslationKeyResolutionPolicy, AnnotationTranslationKeyResolutionPolicy {
+public sealed interface TranslationKeyResolutionPolicy extends InvocationPolicy permits CustomTranslationKeyResolutionPolicy, AnnotationTranslationKeyResolutionPolicy {
 
     /**
      * Returns a standard policy that resolves the translation key from {@link io.github.namiuni.kotonoha.annotations.Key} annotations on the interface method.
