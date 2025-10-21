@@ -17,9 +17,10 @@ pluginManagement {
 sequenceOf(
     "annotations",
     "bom",
+    "resourcebundle-generator-processor",
     "translatable-message",
     "translatable-message-extra-miniplaceholders",
-    "resourcebundle-generator-processor",
+    "translator",
 ).forEach {
     include("kotonoha-$it")
     project(":kotonoha-$it").projectDir = file(it)

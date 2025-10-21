@@ -21,41 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.annotations;
+package io.github.namiuni.kotonoha.translator;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Locale;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.translation.MiniMessageTranslationStore;
 import org.jspecify.annotations.NullMarked;
 
-/**
- * Declares a localized message actual for a method.
- *
- * <p>This annotation is repeatable via {@link Messages}.</p>
- *
- * @since 0.1.0
- */
 @NullMarked
-@Documented
-@Target(ElementType.METHOD)
-@Repeatable(Messages.class)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Message {
+final class KotonohaMiniMessageTranslationStore extends KotonohaDeligationTranslationStore<String> {
 
-    /**
-     * The target locale.
-     *
-     * @return the locale string
-     */
-    String locale() default Locales.ROOT;
+    KotonohaMiniMessageTranslationStore(final Key name, final MiniMessage miniMessage) {
+        super(MiniMessageTranslationStore.create(name, miniMessage));
+    }
 
-    /**
-     * The message content for the locale.
-     *
-     * @return the message text
-     */
-    String content();
+    @Override
+    String parse(final String input, final Locale locale) {
+        return input;
+    }
 }

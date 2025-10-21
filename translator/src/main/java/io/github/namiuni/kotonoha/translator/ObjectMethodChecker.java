@@ -21,41 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.annotations;
+package io.github.namiuni.kotonoha.translator;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.reflect.Method;
 import org.jspecify.annotations.NullMarked;
 
-/**
- * Declares a localized message actual for a method.
- *
- * <p>This annotation is repeatable via {@link Messages}.</p>
- *
- * @since 0.1.0
- */
 @NullMarked
-@Documented
-@Target(ElementType.METHOD)
-@Repeatable(Messages.class)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Message {
+final class ObjectMethodChecker {
 
-    /**
-     * The target locale.
-     *
-     * @return the locale string
-     */
-    String locale() default Locales.ROOT;
+    private ObjectMethodChecker() {
+    }
 
-    /**
-     * The message content for the locale.
-     *
-     * @return the message text
-     */
-    String content();
+    static boolean isObjectMethod(final Method method) {
+        final String name = method.getName();
+        return "hashCode".equals(name) || "toString".equals(name) || "equals".equals(name);
+    }
 }
