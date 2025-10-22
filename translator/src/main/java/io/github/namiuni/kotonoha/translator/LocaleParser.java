@@ -21,41 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.annotations;
+package io.github.namiuni.kotonoha.translator;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Locale;
 import org.jspecify.annotations.NullMarked;
 
-/**
- * Declares a localized message actual for a method.
- *
- * <p>This annotation is repeatable via {@link Messages}.</p>
- *
- * @since 0.1.0
- */
 @NullMarked
-@Documented
-@Target(ElementType.METHOD)
-@Repeatable(Messages.class)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Message {
+final class LocaleParser {
 
-    /**
-     * The target locale.
-     *
-     * @return the locale string
-     */
-    String locale() default Locales.ROOT;
+    private LocaleParser() {
+    }
 
-    /**
-     * The message content for the locale.
-     *
-     * @return the message text
-     */
-    String content();
+    static Locale parseLocale(final String input) {
+        final String languageTag = input.replaceAll("_", "-");
+        return Locale.forLanguageTag(languageTag);
+    }
 }

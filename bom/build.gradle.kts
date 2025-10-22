@@ -9,9 +9,10 @@ version = projectVersion
 dependencies {
     sequenceOf(
         "annotations",
+        "resourcebundle-generator-processor",
         "translatable-message",
         "translatable-message-extra-miniplaceholders",
-        "resourcebundle-generator-processor",
+        "translator",
     ).forEach {
         api(project(":kotonoha-$it"))
     }
