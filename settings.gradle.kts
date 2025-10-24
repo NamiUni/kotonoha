@@ -18,8 +18,8 @@ sequenceOf(
     "annotations",
     "bom",
     "resourcebundle-generator-processor",
-    "translatable-message",
-    "translatable-message-extra-miniplaceholders",
+    "message",
+    "message-extra-miniplaceholders",
     "translator",
 ).forEach {
     include("kotonoha-$it")

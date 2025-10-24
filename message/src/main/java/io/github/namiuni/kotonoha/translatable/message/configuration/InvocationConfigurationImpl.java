@@ -21,23 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.translator;
+package io.github.namiuni.kotonoha.translatable.message.configuration;
 
-import java.util.Locale;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.translation.MiniMessageTranslationStore;
+import io.github.namiuni.kotonoha.translatable.message.policy.argument.TranslationArgumentAdaptationPolicy;
+import io.github.namiuni.kotonoha.translatable.message.policy.key.TranslationKeyResolutionPolicy;
+import io.github.namiuni.kotonoha.translatable.message.policy.result.ResultComponentTransformationPolicy;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-final class KotonohaMiniMessageTranslationStore extends KotonohaForwardingTranslationStore<String> {
-
-    KotonohaMiniMessageTranslationStore(final Key name, final MiniMessage miniMessage) {
-        super(MiniMessageTranslationStore.create(name, miniMessage));
-    }
-
-    @Override
-    String parse(final String input, final Locale locale) {
-        return input;
-    }
+record InvocationConfigurationImpl(
+        TranslationKeyResolutionPolicy keyPolicy,
+        TranslationArgumentAdaptationPolicy argumentPolicy,
+        ResultComponentTransformationPolicy resultPolicy
+) implements InvocationConfiguration {
 }

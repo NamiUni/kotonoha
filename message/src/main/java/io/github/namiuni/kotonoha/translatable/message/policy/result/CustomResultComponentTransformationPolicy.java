@@ -21,23 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.translator;
+package io.github.namiuni.kotonoha.translatable.message.policy.result;
 
-import java.util.Locale;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.translation.MiniMessageTranslationStore;
+import net.kyori.adventure.text.TranslatableComponent;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Defines the strategy for transforming the final {@link TranslatableComponent}
+ * into the required return type of the proxied interface method.
+ *
+ * @see TranslatableComponent
+ * @see java.lang.reflect.InvocationHandler
+ * @since 0.1.0
+ */
 @NullMarked
-final class KotonohaMiniMessageTranslationStore extends KotonohaForwardingTranslationStore<String> {
-
-    KotonohaMiniMessageTranslationStore(final Key name, final MiniMessage miniMessage) {
-        super(MiniMessageTranslationStore.create(name, miniMessage));
-    }
-
-    @Override
-    String parse(final String input, final Locale locale) {
-        return input;
-    }
+@ApiStatus.Experimental
+public non-sealed interface CustomResultComponentTransformationPolicy extends ResultComponentTransformationPolicy {
 }

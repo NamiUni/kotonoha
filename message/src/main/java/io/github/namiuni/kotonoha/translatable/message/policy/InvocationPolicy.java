@@ -21,23 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.translator;
+package io.github.namiuni.kotonoha.translatable.message.policy;
 
-import java.util.Locale;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.translation.MiniMessageTranslationStore;
+import io.github.namiuni.kotonoha.translatable.message.KotonohaMessage;
+import io.github.namiuni.kotonoha.translatable.message.configuration.InvocationConfiguration;
+import java.lang.reflect.Method;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Defines validation rules for methods.
+ *
+ * @see InvocationConfiguration
+ * @since 0.1.0
+ */
 @NullMarked
-final class KotonohaMiniMessageTranslationStore extends KotonohaForwardingTranslationStore<String> {
+@ApiStatus.Internal
+public interface InvocationPolicy {
 
-    KotonohaMiniMessageTranslationStore(final Key name, final MiniMessage miniMessage) {
-        super(MiniMessageTranslationStore.create(name, miniMessage));
-    }
-
-    @Override
-    String parse(final String input, final Locale locale) {
-        return input;
-    }
+    /**
+     * Validates whether a method satisfies this policy's requirements.
+     *
+     * @param method the method being validated
+     * @throws KotonohaValidationException if the method fails validation based on this policy’s requirements
+     * @see KotonohaMessage
+     * @since 0.1.0
+     */
+    void validate(Method method) throws KotonohaValidationException;
 }

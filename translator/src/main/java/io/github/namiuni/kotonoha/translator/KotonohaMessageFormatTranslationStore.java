@@ -30,7 +30,7 @@ import net.kyori.adventure.translation.TranslationStore;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-final class KotonohaMessageFormatTranslationStore extends KotonohaDeligationTranslationStore<MessageFormat> {
+final class KotonohaMessageFormatTranslationStore extends KotonohaForwardingTranslationStore<MessageFormat> {
 
     KotonohaMessageFormatTranslationStore(final Key name) {
         super(TranslationStore.messageFormat(name));
