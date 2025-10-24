@@ -21,23 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.namiuni.kotonoha.translator;
+package io.github.namiuni.kotonoha.annotations;
 
-import java.util.Locale;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.translation.MiniMessageTranslationStore;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Define the translation target associated with the annotated element.
+ *
+ * @since 0.1.0
+ */
+@java.lang.annotation.Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
 @NullMarked
-final class KotonohaMiniMessageTranslationStore extends KotonohaForwardingTranslationStore<String> {
-
-    KotonohaMiniMessageTranslationStore(final Key name, final MiniMessage miniMessage) {
-        super(MiniMessageTranslationStore.create(name, miniMessage));
-    }
-
-    @Override
-    String parse(final String input, final Locale locale) {
-        return input;
-    }
+public @interface Target {
 }

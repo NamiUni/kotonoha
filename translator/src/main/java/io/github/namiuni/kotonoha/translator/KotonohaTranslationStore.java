@@ -37,7 +37,7 @@ import org.jspecify.annotations.NullMarked;
  * @since 0.1.0
  */
 @NullMarked
-public sealed interface KotonohaTranslationStore<T> extends TranslationStore.StringBased<T> permits KotonohaDeligationTranslationStore {
+public sealed interface KotonohaTranslationStore<T> extends TranslationStore.StringBased<T> permits KotonohaForwardingTranslationStore {
 
     /**
      * Returns a {@link java.text.MessageFormat}-based translation store.

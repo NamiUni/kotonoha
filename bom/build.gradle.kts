@@ -10,8 +10,8 @@ dependencies {
     sequenceOf(
         "annotations",
         "resourcebundle-generator-processor",
-        "translatable-message",
-        "translatable-message-extra-miniplaceholders",
+        "message",
+        "message-extra-miniplaceholders",
         "translator",
     ).forEach {
         api(project(":kotonoha-$it"))
