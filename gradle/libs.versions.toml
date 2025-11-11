@@ -2,7 +2,7 @@
 # Tool
 checkstyle = "12.0.1"
 spotless = "8.0.0"
-maven-publish = "0.34.0"
+maven-publish = "0.35.0"
 google-auto-service = "1.1.1"
 
 # Java
