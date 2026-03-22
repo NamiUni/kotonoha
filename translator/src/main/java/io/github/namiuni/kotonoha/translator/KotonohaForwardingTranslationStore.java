@@ -61,7 +61,7 @@ abstract sealed class KotonohaForwardingTranslationStore<T> implements KotonohaT
             return;
         }
 
-        if (ObjectMethodChecker.isObjectMethod(method)) {
+        if (method.getDeclaringClass() == Object.class) {
             return;
         }
 
