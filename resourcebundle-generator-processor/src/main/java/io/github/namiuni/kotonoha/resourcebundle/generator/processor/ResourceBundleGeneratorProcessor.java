@@ -24,6 +24,7 @@
 package io.github.namiuni.kotonoha.resourcebundle.generator.processor;
 
 import io.github.namiuni.kotonoha.annotations.Key;
+import io.github.namiuni.kotonoha.annotations.Locales;
 import io.github.namiuni.kotonoha.annotations.Message;
 import io.github.namiuni.kotonoha.annotations.Messages;
 import io.github.namiuni.kotonoha.annotations.ResourceBundle;
@@ -32,7 +33,6 @@ import java.io.Writer;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -184,12 +184,11 @@ public final class ResourceBundleGeneratorProcessor extends AbstractProcessor {
         return new Message[0];
     }
 
-    private String getLocaleKey(final String localeString) {
-        final Locale locale = Locale.forLanguageTag(localeString.replace('_', '-'));
-        if (locale.equals(Locale.ROOT)) {
+    private String getLocaleKey(final Locales locale) {
+        if (locale == Locales.ROOT) {
             return "";
         }
-        return "_" + locale;
+        return "_" + locale.asLocale();
     }
 
     private void writePropertiesFiles(final String baseName, final Map<String, Properties> localeProperties) {

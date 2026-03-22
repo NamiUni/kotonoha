@@ -48,9 +48,9 @@ public @interface Message {
     /**
      * The target locale.
      *
-     * @return the locale string
+     * @return the locale
      */
-    String locale() default Locales.ROOT;
+    Locales locale() default Locales.ROOT;
 
     /**
      * The message content for the locale.

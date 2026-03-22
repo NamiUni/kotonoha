@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.github.namiuni.kotonoha.annotations.Key;
+import io.github.namiuni.kotonoha.annotations.Locales;
 import io.github.namiuni.kotonoha.annotations.Message;
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -55,13 +56,14 @@ class KotonohaTranslationStoreTest {
 
     interface DefaultMethodInterface {
         @Key("default.method")
-        @Message(locale = "en_US", content = "Default method")
+        @Message(locale = Locales.EN_US, content = "Default method")
         default void defaultMethod() {
             // ignored
         }
     }
 
     interface ObjectMethodsInterface {
+
         @Override
         boolean equals(Object obj);
 
@@ -73,7 +75,7 @@ class KotonohaTranslationStoreTest {
     }
 
     interface MissingKeyAnnotationInterface {
-        @Message(locale = "en_US", content = "Missing @Key Annotation")
+        @Message(locale = Locales.EN_US, content = "Missing @Key Annotation")
         void missingKey();
     }
 
@@ -84,49 +86,49 @@ class KotonohaTranslationStoreTest {
 
     interface ValidSingleMethodInterface {
         @Key("valid.method")
-        @Message(locale = "en_US", content = "Valid method")
+        @Message(locale = Locales.EN_US, content = "Valid method")
         void validMethod();
     }
 
     interface ValidMultipleMethodsInterface {
         @Key("valid.method1")
-        @Message(locale = "en_US", content = "Valid method 1")
+        @Message(locale = Locales.EN_US, content = "Valid method 1")
         void validMethod1();
 
         @Key("valid.method2")
-        @Message(locale = "en_US", content = "Valid method 2")
+        @Message(locale = Locales.EN_US, content = "Valid method 2")
         void validMethod2();
     }
 
     interface MultipleMessagesInterface {
         @Key("multi.locale.message")
-        @Message(locale = "en_US", content = "Hello")
-        @Message(locale = "ja_JP", content = "こんにちは")
+        @Message(locale = Locales.EN_US, content = "Hello")
+        @Message(locale = Locales.JA_JP, content = "こんにちは")
         void multiLocaleMessage();
     }
 
     interface TestMessageInterface {
         @Key("test.message")
-        @Message(locale = "en_US", content = "Test message")
-        @Message(locale = "ja_JP", content = "テストメッセージ")
+        @Message(locale = Locales.EN_US, content = "Test message")
+        @Message(locale = Locales.JA_JP, content = "テストメッセージ")
         void testMessage();
     }
 
     interface TestMessageFormatArgsInterface {
         @Key("test.args.message")
-        @Message(locale = "en_US", content = "Hello, {0}!")
+        @Message(locale = Locales.EN_US, content = "Hello, {0}!")
         void testArgsMessage(String name);
     }
 
     interface InvalidMessageFormatInterface {
         @Key("invalid.mf.syntax")
-        @Message(locale = "en_US", content = "Invalid { syntax")
+        @Message(locale = Locales.EN_US, content = "Invalid { syntax")
         void invalidMessageFormat();
     }
 
     interface TestMiniMessageInterface {
         @Key("test.mm.message")
-        @Message(locale = "en_US", content = "<green>Hello!</green>")
+        @Message(locale = Locales.EN_US, content = "<green>Hello!</green>")
         void testMiniMessage();
     }
 
