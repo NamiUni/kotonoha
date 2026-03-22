@@ -1,69 +1,40 @@
 # Kotonoha (言の葉)
-
-A localization framework for projects using [Adventure](https://github.com/KyoriPowered/adventure).
-
-Kotonoha allows defining multilingual messages as methods in Java interfaces.
-
-## Modules
-
-| Module                                          | Description                                                                                                                                  |
-|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| **kotonoha-annotations**                        | Common annotations shared across modules.                                                                                                    |
-| **kotonoha-resourcebundle-generator-processor** | An annotation processor that generates `.properties` resource bundles from annotated interfaces and includes them in the resulting artifact. |
-| **kotonoha-message**                            | Core module providing reflection-based proxies that create `TranslatableComponent` instances from interface method calls.                    |
-| **kotonoha-message-extra-miniplaceholders**     | Extension module providing [MiniPlaceholders](https://github.com/MiniPlaceholders) integration.                                              |
-| **kotonoha-translator**                         | A `Translator` module that registers translations from annotated methods.                                                                    |
-
-### Quick Start (MessageFormat)
-
-Depends on `kotonoha-message` and `kotonoha-translator`.
-
-Define a message interface:
-
+ 
+A localization framework for Java projects built on [Adventure](https://github.com/KyoriPowered/adventure).  
+Define multilingual messages as methods on a plain Java interface.
+ 
 ```java
 public interface ExampleMessages {
-
-    // {0} will be replaced by the value of the 'playerName' argument.
-    @Key("your_plugin.welcome.message")
+ 
+    @Key("example.welcome")
     @Message(locale = Locales.EN_US, content = "Welcome, {0}!")
     @Message(locale = Locales.JA_JP, content = "ようこそ、{0}!")
     Component welcomeMessage(Component playerName);
-
-    /*
-     For MiniMessage:
-     <player_name> will be replaced by the value of the 'playerName' argument.
-     @Key("your_plugin.welcome.message")
-     @Message(locale = Locales.EN_US, content = "Welcome, <player_name>!")
-     @Message(locale = Locales.EN_US, content = "ようこそ、<player_name>!")
-     Component welcomeMessage(@Name("player_name") Component playerName);
-    */
 }
 ```
-
-Register the translator and create a proxy instance:
-
+ 
 ```java
-// Register translations from the interface.
-Key name = Key.key("your_plugin", "messages");
-KotonohaTranslationStore<MessageFormat> translator = KotonohaTranslationStore.messageFormat(name);
-translator.registerInterface(ExampleMessages.class);
-
-// Add to global source.
-GlobalTranslator.translator().addSource(translator);
-
-// Create proxy instance.
+KotonohaTranslationStore<MessageFormat> store = KotonohaTranslationStore.messageFormat(name);
+store.registerInterface(ExampleMessages.class);
+GlobalTranslator.translator().addSource(store);
+ 
 ExampleMessages messages = KotonohaMessage.createProxy(ExampleMessages.class, FormatTypes.MESSAGE_FORMAT);
-
-// Get the message and send it.
-Component result = messages.welcomeMessage(player.name());
-audience.sendMessage(result); // Welcome, Notch!!
+Componnent message = messages.welcomeMessage(player.displayName());
+player.sendMessage(message);
 ```
-
-For more information on Adventure's localization:
-https://docs.papermc.io/adventure/localization/
-
+ 
+## Modules
+ 
+| Module | Description |
+| --- | --- |
+| `kotonoha-annotations` | Common annotations (`@Key`, `@Message`, `@Name`, etc.) |
+| `kotonoha-message` | Proxy factory that builds `TranslatableComponent` from interface calls |
+| `kotonoha-translator` | Registers translations from annotated interfaces into Adventure's `TranslationStore` |
+| `kotonoha-resourcebundle-generator-processor` | Compile-time processor that generates `.properties` files from annotated interfaces |
+| `kotonoha-message-extra-miniplaceholders` | [MiniPlaceholders](https://github.com/MiniPlaceholders/MiniPlaceholders) integration |
+ 
 ## Documentation
-
-Javadocs (Available soon)
-
-GitHub Wiki (Available soon)
+ 
+[GitHub Wiki](https://github.com/NamiUni/kotonoha/wiki)
+ 
+[Javadoc](https://javadoc.io/doc/io.github.namiuni)
