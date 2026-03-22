@@ -24,16 +24,16 @@ public interface ExampleMessages {
 
     // {0} will be replaced by the value of the 'playerName' argument.
     @Key("your_plugin.welcome.message")
-    @Message(locale = "en_US", content = "Welcome, {0}!")
-    @Message(locale = "ja_JP", content = "ようこそ、{0}!")
+    @Message(locale = Locales.EN_US, content = "Welcome, {0}!")
+    @Message(locale = Locales.JA_JP, content = "ようこそ、{0}!")
     Component welcomeMessage(Component playerName);
 
     /*
      For MiniMessage:
      <player_name> will be replaced by the value of the 'playerName' argument.
      @Key("your_plugin.welcome.message")
-     @Message(locale = "en_US", content = "Welcome, <player_name>!")
-     @Message(locale = "ja_JP", content = "ようこそ、<player_name>!")
+     @Message(locale = Locales.EN_US, content = "Welcome, <player_name>!")
+     @Message(locale = Locales.EN_US, content = "ようこそ、<player_name>!")
      Component welcomeMessage(@Name("player_name") Component playerName);
     */
 }

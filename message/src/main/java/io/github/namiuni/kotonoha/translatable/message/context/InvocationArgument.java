@@ -1,7 +1,7 @@
 /*
  * This file is part of kotonoha, licensed under the MIT License.
  *
- * Copyright (c) 2025 Namiu (Unitarou)
+ * Copyright (c) 2026 Namiu (うにたろう)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
