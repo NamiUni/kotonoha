@@ -3,6 +3,7 @@
 A localization framework for projects using [Adventure](https://github.com/KyoriPowered/adventure).
 
 Kotonoha allows defining multilingual messages as methods in Java interfaces.
+
 ## Modules
 
 | Module                                          | Description                                                                                                                                  |
