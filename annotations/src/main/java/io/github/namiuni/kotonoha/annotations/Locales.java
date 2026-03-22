@@ -23,295 +23,318 @@
  */
 package io.github.namiuni.kotonoha.annotations;
 
+import java.util.Locale;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Utility class containing supported locale code strings for resource bundle generation.
+ * Supported locales for resource bundle generation.
  *
- * <p>Each constant represents a locale identifier in the format "language_COUNTRY"
- * or "language" (for locales without a specific country).</p>
- *
- * @since 0.1.0
+ * @since 0.2.0
  */
 @NullMarked
 @SuppressWarnings("unused")
-public final class Locales {
+public enum Locales {
 
     /** ROOT locale. */
-    public static final String ROOT = "";
+    ROOT("", Locale.ROOT),
 
     // A-B
     /** Afrikaans. */
-    public static final String AF_ZA = "af_ZA";
+    AF_ZA("af_ZA", Locale.of("af", "ZA")),
     /** Arabic. */
-    public static final String AR_SA = "ar_SA";
+    AR_SA("ar_SA", Locale.of("ar", "SA")),
     /** Asturian. */
-    public static final String AST_ES = "ast_ES";
+    AST_ES("ast_ES", Locale.of("ast", "ES")),
     /** Azerbaijani. */
-    public static final String AZ_AZ = "az_AZ";
+    AZ_AZ("az_AZ", Locale.of("az", "AZ")),
     /** Bashkir. */
-    public static final String BA_RU = "ba_RU";
+    BA_RU("ba_RU", Locale.of("ba", "RU")),
     /** Bavarian. */
-    public static final String BAR = "bar";
+    BAR("bar", Locale.of("bar")),
     /** Belarusian. */
-    public static final String BE_BY = "be_BY";
+    BE_BY("be_BY", Locale.of("be", "BY")),
     /** Bulgarian. */
-    public static final String BG_BG = "bg_BG";
+    BG_BG("bg_BG", Locale.of("bg", "BG")),
     /** Breton. */
-    public static final String BR_FR = "br_FR";
+    BR_FR("br_FR", Locale.of("br", "FR")),
     /** Barbadian. */
-    public static final String BRB = "brb";
+    BRB("brb", Locale.of("brb")),
     /** Bosnian. */
-    public static final String BS_BA = "bs_BA";
+    BS_BA("bs_BA", Locale.of("bs", "BA")),
 
     // C-D
     /** Catalan. */
-    public static final String CA_ES = "ca_ES";
+    CA_ES("ca_ES", Locale.of("ca", "ES")),
     /** Czech. */
-    public static final String CS_CZ = "cs_CZ";
+    CS_CZ("cs_CZ", Locale.of("cs", "CZ")),
     /** Welsh. */
-    public static final String CY_GB = "cy_GB";
+    CY_GB("cy_GB", Locale.of("cy", "GB")),
     /** Danish. */
-    public static final String DA_DK = "da_DK";
+    DA_DK("da_DK", Locale.of("da", "DK")),
     /** German (Austria). */
-    public static final String DE_AT = "de_AT";
+    DE_AT("de_AT", Locale.of("de", "AT")),
     /** German (Switzerland). */
-    public static final String DE_CH = "de_CH";
+    DE_CH("de_CH", Locale.of("de", "CH")),
     /** German (Germany). */
-    public static final String DE_DE = "de_DE";
+    DE_DE("de_DE", Locale.of("de", "DE")),
 
     // E-F
     /** Greek. */
-    public static final String EL_GR = "el_GR";
+    EL_GR("el_GR", Locale.of("el", "GR")),
     /** English (Australia). */
-    public static final String EN_AU = "en_AU";
+    EN_AU("en_AU", Locale.of("en", "AU")),
     /** English (Canada). */
-    public static final String EN_CA = "en_CA";
+    EN_CA("en_CA", Locale.of("en", "CA")),
     /** English (United Kingdom). */
-    public static final String EN_GB = "en_GB";
+    EN_GB("en_GB", Locale.of("en", "GB")),
     /** English (New Zealand). */
-    public static final String EN_NZ = "en_NZ";
+    EN_NZ("en_NZ", Locale.of("en", "NZ")),
     /** English (Pirate). */
-    public static final String EN_PT = "en_PT";
+    EN_PT("en_PT", Locale.of("en", "PT")),
     /** English (Upside Down). */
-    public static final String EN_UD = "en_UD";
+    EN_UD("en_UD", Locale.of("en", "UD")),
     /** English (United States). */
-    public static final String EN_US = "en_US";
+    EN_US("en_US", Locale.of("en", "US")),
     /** English (Pirate). */
-    public static final String ENP = "enp";
+    ENP("enp", Locale.of("enp")),
     /** Esperanto. */
-    public static final String EO_UY = "eo_UY";
+    EO_UY("eo_UY", Locale.of("eo", "UY")),
     /** Spanish (Argentina). */
-    public static final String ES_AR = "es_AR";
+    ES_AR("es_AR", Locale.of("es", "AR")),
     /** Spanish (Chile). */
-    public static final String ES_CL = "es_CL";
+    ES_CL("es_CL", Locale.of("es", "CL")),
     /** Spanish (Ecuador). */
-    public static final String ES_EC = "es_EC";
+    ES_EC("es_EC", Locale.of("es", "EC")),
     /** Spanish (Spain). */
-    public static final String ES_ES = "es_ES";
+    ES_ES("es_ES", Locale.of("es", "ES")),
     /** Spanish (Mexico). */
-    public static final String ES_MX = "es_MX";
+    ES_MX("es_MX", Locale.of("es", "MX")),
     /** Spanish (Uruguay). */
-    public static final String ES_UY = "es_UY";
+    ES_UY("es_UY", Locale.of("es", "UY")),
     /** Spanish (Venezuela). */
-    public static final String ES_VE = "es_VE";
+    ES_VE("es_VE", Locale.of("es", "VE")),
     /** Estonian. */
-    public static final String ET_EE = "et_EE";
+    ET_EE("et_EE", Locale.of("et", "EE")),
     /** Basque. */
-    public static final String EU_ES = "eu_ES";
+    EU_ES("eu_ES", Locale.of("eu", "ES")),
     /** Persian. */
-    public static final String FA_IR = "fa_IR";
+    FA_IR("fa_IR", Locale.of("fa", "IR")),
     /** Finnish. */
-    public static final String FI_FI = "fi_FI";
+    FI_FI("fi_FI", Locale.of("fi", "FI")),
     /** Filipino. */
-    public static final String FIL_PH = "fil_PH";
+    FIL_PH("fil_PH", Locale.of("fil", "PH")),
     /** Faroese. */
-    public static final String FO_FO = "fo_FO";
+    FO_FO("fo_FO", Locale.of("fo", "FO")),
     /** French (Canada). */
-    public static final String FR_CA = "fr_CA";
+    FR_CA("fr_CA", Locale.of("fr", "CA")),
     /** French (France). */
-    public static final String FR_FR = "fr_FR";
+    FR_FR("fr_FR", Locale.of("fr", "FR")),
     /** Franconian. */
-    public static final String FRA_DE = "fra_DE";
+    FRA_DE("fra_DE", Locale.of("fra", "DE")),
     /** Friulian. */
-    public static final String FUR_IT = "fur_IT";
+    FUR_IT("fur_IT", Locale.of("fur", "IT")),
     /** Frisian. */
-    public static final String FY_NL = "fy_NL";
+    FY_NL("fy_NL", Locale.of("fy", "NL")),
 
     // G-I
     /** Irish. */
-    public static final String GA_IE = "ga_IE";
+    GA_IE("ga_IE", Locale.of("ga", "IE")),
     /** Scottish Gaelic. */
-    public static final String GD_GB = "gd_GB";
+    GD_GB("gd_GB", Locale.of("gd", "GB")),
     /** Galician. */
-    public static final String GL_ES = "gl_ES";
+    GL_ES("gl_ES", Locale.of("gl", "ES")),
     /** Gothic. */
-    public static final String GOT_SE = "got_SE";
+    GOT_SE("got_SE", Locale.of("got", "SE")),
     /** Manx. */
-    public static final String GV_IM = "gv_IM";
+    GV_IM("gv_IM", Locale.of("gv", "IM")),
     /** Hawaiian. */
-    public static final String HAW_US = "haw_US";
+    HAW_US("haw_US", Locale.of("haw", "US")),
     /** Hebrew. */
-    public static final String HE_IL = "he_IL";
+    HE_IL("he_IL", Locale.of("he", "IL")),
     /** Hindi. */
-    public static final String HI_IN = "hi_IN";
+    HI_IN("hi_IN", Locale.of("hi", "IN")),
     /** Croatian. */
-    public static final String HR_HR = "hr_HR";
+    HR_HR("hr_HR", Locale.of("hr", "HR")),
     /** Hungarian. */
-    public static final String HU_HU = "hu_HU";
+    HU_HU("hu_HU", Locale.of("hu", "HU")),
     /** Armenian. */
-    public static final String HY_AM = "hy_AM";
+    HY_AM("hy_AM", Locale.of("hy", "AM")),
     /** Indonesian. */
-    public static final String ID_ID = "id_ID";
+    ID_ID("id_ID", Locale.of("id", "ID")),
     /** Igbo. */
-    public static final String IG_NG = "ig_NG";
+    IG_NG("ig_NG", Locale.of("ig", "NG")),
     /** Ido. */
-    public static final String IO_EN = "io_EN";
+    IO_EN("io_EN", Locale.of("io", "EN")),
     /** Icelandic. */
-    public static final String IS_IS = "is_IS";
+    IS_IS("is_IS", Locale.of("is", "IS")),
     /** Interslavic. */
-    public static final String ISV = "isv";
+    ISV("isv", Locale.of("isv")),
     /** Italian (Italy). */
-    public static final String IT_IT = "it_IT";
+    IT_IT("it_IT", Locale.of("it", "IT")),
 
     // J-L
     /** Japanese (Japan). */
-    public static final String JA_JP = "ja_JP";
+    JA_JP("ja_JP", Locale.of("ja", "JP")),
     /** Lojban. */
-    public static final String JBO_EN = "jbo_EN";
+    JBO_EN("jbo_EN", Locale.of("jbo", "EN")),
     /** Georgian. */
-    public static final String KA_GE = "ka_GE";
+    KA_GE("ka_GE", Locale.of("ka", "GE")),
     /** Kazakh. */
-    public static final String KK_KZ = "kk_KZ";
+    KK_KZ("kk_KZ", Locale.of("kk", "KZ")),
     /** Kannada. */
-    public static final String KN_IN = "kn_IN";
+    KN_IN("kn_IN", Locale.of("kn", "IN")),
     /** Korean (South Korea). */
-    public static final String KO_KR = "ko_KR";
+    KO_KR("ko_KR", Locale.of("ko", "KR")),
     /** Kölsch. */
-    public static final String KSH = "ksh";
+    KSH("ksh", Locale.of("ksh")),
     /** Cornish. */
-    public static final String KW_GB = "kw_GB";
+    KW_GB("kw_GB", Locale.of("kw", "GB")),
     /** Latin. */
-    public static final String LA_LA = "la_LA";
+    LA_LA("la_LA", Locale.of("la", "LA")),
     /** Luxembourgish. */
-    public static final String LB_LU = "lb_LU";
+    LB_LU("lb_LU", Locale.of("lb", "LU")),
     /** Limburgish. */
-    public static final String LI_LI = "li_LI";
+    LI_LI("li_LI", Locale.of("li", "LI")),
     /** Ligurian. */
-    public static final String LIJ_IT = "lij_IT";
+    LIJ_IT("lij_IT", Locale.of("lij", "IT")),
     /** Lombard. */
-    public static final String LMO = "lmo";
+    LMO("lmo", Locale.of("lmo")),
     /** LOLCAT. */
-    public static final String LOL_US = "lol_US";
+    LOL_US("lol_US", Locale.of("lol", "US")),
     /** Lithuanian. */
-    public static final String LT_LT = "lt_LT";
+    LT_LT("lt_LT", Locale.of("lt", "LT")),
     /** Latvian. */
-    public static final String LV_LV = "lv_LV";
+    LV_LV("lv_LV", Locale.of("lv", "LV")),
     /** Literary Chinese. */
-    public static final String LZH = "lzh";
+    LZH("lzh", Locale.of("lzh")),
 
     // M-N
     /** Macedonian. */
-    public static final String MK_MK = "mk_MK";
+    MK_MK("mk_MK", Locale.of("mk", "MK")),
     /** Mongolian. */
-    public static final String MN_MN = "mn_MN";
+    MN_MN("mn_MN", Locale.of("mn", "MN")),
     /** Malay. */
-    public static final String MS_MY = "ms_MY";
+    MS_MY("ms_MY", Locale.of("ms", "MY")),
     /** Maltese. */
-    public static final String MT_MT = "mt_MT";
+    MT_MT("mt_MT", Locale.of("mt", "MT")),
     /** Neapolitan. */
-    public static final String NAP = "nap";
+    NAP("nap", Locale.of("nap")),
     /** Norwegian Bokmål. */
-    public static final String NB_NO = "nb_NO";
+    NB_NO("nb_NO", Locale.of("nb", "NO")),
     /** Low German. */
-    public static final String NDS_DE = "nds_DE";
+    NDS_DE("nds_DE", Locale.of("nds", "DE")),
     /** Dutch (Belgium). */
-    public static final String NL_BE = "nl_BE";
+    NL_BE("nl_BE", Locale.of("nl", "BE")),
     /** Dutch (Netherlands). */
-    public static final String NL_NL = "nl_NL";
+    NL_NL("nl_NL", Locale.of("nl", "NL")),
     /** Norwegian Nynorsk. */
-    public static final String NN_NO = "nn_NO";
+    NN_NO("nn_NO", Locale.of("nn", "NO")),
     /** N'Ko. */
-    public static final String NU_NG = "nu_NG";
+    NU_NG("nu_NG", Locale.of("nu", "NG")),
 
     // O-R
     /** Occitan. */
-    public static final String OC_FR = "oc_FR";
+    OC_FR("oc_FR", Locale.of("oc", "FR")),
     /** Elfdalian. */
-    public static final String OVD = "ovd";
+    OVD("ovd", Locale.of("ovd")),
     /** Polish. */
-    public static final String PL_PL = "pl_PL";
+    PL_PL("pl_PL", Locale.of("pl", "PL")),
     /** Piedmontese. */
-    public static final String PMS = "pms";
+    PMS("pms", Locale.of("pms")),
     /** Portuguese (Brazil). */
-    public static final String PT_BR = "pt_BR";
+    PT_BR("pt_BR", Locale.of("pt", "BR")),
     /** Portuguese (Portugal). */
-    public static final String PT_PT = "pt_PT";
+    PT_PT("pt_PT", Locale.of("pt", "PT")),
     /** Quenya. */
-    public static final String QYA_AA = "qya_AA";
+    QYA_AA("qya_AA", Locale.of("qya", "AA")),
     /** Romanian. */
-    public static final String RO_RO = "ro_RO";
+    RO_RO("ro_RO", Locale.of("ro", "RO")),
     /** Russian (Pre-revolutionary). */
-    public static final String RPR = "rpr";
+    RPR("rpr", Locale.of("rpr")),
     /** Russian. */
-    public static final String RU_RU = "ru_RU";
+    RU_RU("ru_RU", Locale.of("ru", "RU")),
 
     // S-T
     /** Northern Sami. */
-    public static final String SE_NO = "se_NO";
+    SE_NO("se_NO", Locale.of("se", "NO")),
     /** Slovak. */
-    public static final String SK_SK = "sk_SK";
+    SK_SK("sk_SK", Locale.of("sk", "SK")),
     /** Slovenian. */
-    public static final String SL_SI = "sl_SI";
+    SL_SI("sl_SI", Locale.of("sl", "SI")),
     /** Somali. */
-    public static final String SO_SO = "so_SO";
+    SO_SO("so_SO", Locale.of("so", "SO")),
     /** Albanian. */
-    public static final String SQ_AL = "sq_AL";
+    SQ_AL("sq_AL", Locale.of("sq", "AL")),
     /** Serbian. */
-    public static final String SR_SP = "sr_SP";
+    SR_SP("sr_SP", Locale.of("sr", "SP")),
     /** Swedish. */
-    public static final String SV_SE = "sv_SE";
+    SV_SE("sv_SE", Locale.of("sv", "SE")),
     /** Swabian. */
-    public static final String SWG = "swg";
+    SWG("swg", Locale.of("swg")),
     /** Silesian. */
-    public static final String SZL = "szl";
+    SZL("szl", Locale.of("szl")),
 
     // T-Z
     /** Tamil. */
-    public static final String TA_IN = "ta_IN";
+    TA_IN("ta_IN", Locale.of("ta", "IN")),
     /** Thai. */
-    public static final String TH_TH = "th_TH";
+    TH_TH("th_TH", Locale.of("th", "TH")),
     /** Tagalog. */
-    public static final String TL_PH = "tl_PH";
+    TL_PH("tl_PH", Locale.of("tl", "PH")),
     /** Klingon. */
-    public static final String TLH_AA = "tlh_AA";
+    TLH_AA("tlh_AA", Locale.of("tlh", "AA")),
     /** Turkish. */
-    public static final String TR_TR = "tr_TR";
+    TR_TR("tr_TR", Locale.of("tr", "TR")),
     /** Tatar. */
-    public static final String TT_RU = "tt_RU";
+    TT_RU("tt_RU", Locale.of("tt", "RU")),
     /** Ukrainian. */
-    public static final String UK_UA = "uk_UA";
+    UK_UA("uk_UA", Locale.of("uk", "UA")),
     /** Valencian. */
-    public static final String VAL_ES = "val_ES";
+    VAL_ES("val_ES", Locale.of("val", "ES")),
     /** Venetian. */
-    public static final String VEC_IT = "vec_IT";
+    VEC_IT("vec_IT", Locale.of("vec", "IT")),
     /** Vietnamese. */
-    public static final String VI_VN = "vi_VN";
+    VI_VN("vi_VN", Locale.of("vi", "VN")),
     /** Viossa. */
-    public static final String VP_VL = "vp_VL";
+    VP_VL("vp_VL", Locale.of("vp", "VL")),
     /** Yiddish. */
-    public static final String YI_DE = "yi_DE";
+    YI_DE("yi_DE", Locale.of("yi", "DE")),
     /** Yoruba. */
-    public static final String YO_NG = "yo_NG";
+    YO_NG("yo_NG", Locale.of("yo", "NG")),
     /** Chinese (Simplified, China). */
-    public static final String ZH_CN = "zh_CN";
+    ZH_CN("zh_CN", Locale.of("zh", "CN")),
     /** Chinese (Traditional, Hong Kong). */
-    public static final String ZH_HK = "zh_HK";
+    ZH_HK("zh_HK", Locale.of("zh", "HK")),
     /** Chinese (Traditional, Taiwan). */
-    public static final String ZH_TW = "zh_TW";
+    ZH_TW("zh_TW", Locale.of("zh", "TW")),
     /** Malay (Jawi). */
-    public static final String ZLM_ARAB = "zlm_ARAB";
+    ZLM_ARAB("zlm_ARAB", Locale.of("zlm", "ARAB"));
 
-    private Locales() {
+    private final String tag;
+    private final Locale locale;
+
+    Locales(final String tag, final Locale locale) {
+        this.tag = tag;
+        this.locale = locale;
+    }
+
+    /**
+     * Returns the locale tag string (e.g., {@code "en_US"}).
+     *
+     * @return the locale tag
+     * @since 0.1.0
+     */
+    public String tag() {
+        return this.tag;
+    }
+
+    /**
+     * Returns the {@link Locale} corresponding to this locale constant.
+     *
+     * @return the locale
+     * @since 0.1.0
+     */
+    public Locale asLocale() {
+        return this.locale;
     }
 }

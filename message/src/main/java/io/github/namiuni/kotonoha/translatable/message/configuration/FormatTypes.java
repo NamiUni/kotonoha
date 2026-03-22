@@ -58,7 +58,7 @@ public final class FormatTypes {
      */
     public static final InvocationConfiguration MINI_MESSAGE = InvocationConfiguration.of(
             TranslationKeyResolutionPolicy.annotationKeyResolutionPolicy(),
-            TranslationArgumentAdaptationPolicy.messageFormat(),
+            TranslationArgumentAdaptationPolicy.miniMessage(),
             ResultComponentTransformationPolicy.noOperation()
     );
 

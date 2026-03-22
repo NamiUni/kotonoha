@@ -75,12 +75,9 @@ abstract sealed class KotonohaForwardingTranslationStore<T> implements KotonohaT
         }
 
         for (final Message messageAnnotation : messageAnnotations) {
-            final String localeString = messageAnnotation.locale();
-            final Locale locale = LocaleParser.parseLocale(localeString);
-
+            final Locale locale = messageAnnotation.locale().asLocale();
             final String translationMessage = messageAnnotation.content();
             final T parsedMessage = this.parse(translationMessage, locale);
-
             this.store.register(translationKey, locale, parsedMessage);
         }
     }

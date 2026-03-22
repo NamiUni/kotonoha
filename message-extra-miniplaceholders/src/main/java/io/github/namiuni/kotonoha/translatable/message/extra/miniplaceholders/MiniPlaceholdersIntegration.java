@@ -24,6 +24,7 @@
 package io.github.namiuni.kotonoha.translatable.message.extra.miniplaceholders;
 
 import io.github.miniplaceholders.api.MiniPlaceholders;
+import java.util.concurrent.atomic.AtomicReference;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.util.TriState;
 import org.jspecify.annotations.NullMarked;
@@ -31,21 +32,21 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 final class MiniPlaceholdersIntegration {
 
-    private static TriState miniplaceholdersIsLoaded = TriState.NOT_SET;
+    private static final AtomicReference<TriState> MINI_PLACEHOLDERS_LOADED = new AtomicReference<>(TriState.NOT_SET);
 
     private MiniPlaceholdersIntegration() {
     }
 
     static boolean miniPlaceholdersLoaded() {
-        if (miniplaceholdersIsLoaded == TriState.NOT_SET) {
+        if (MINI_PLACEHOLDERS_LOADED.get() == TriState.NOT_SET) {
             try {
                 Class.forName("io.github.miniplaceholders.api.MiniPlaceholders");
-                miniplaceholdersIsLoaded = TriState.TRUE;
+                MINI_PLACEHOLDERS_LOADED.compareAndSet(TriState.NOT_SET, TriState.TRUE);
             } catch (final ClassNotFoundException ignored) {
-                miniplaceholdersIsLoaded = TriState.FALSE;
+                MINI_PLACEHOLDERS_LOADED.compareAndSet(TriState.NOT_SET, TriState.FALSE);
             }
         }
-        return miniplaceholdersIsLoaded == TriState.TRUE;
+        return MINI_PLACEHOLDERS_LOADED.get() == TriState.TRUE;
     }
 
     static TagResolver global() {
