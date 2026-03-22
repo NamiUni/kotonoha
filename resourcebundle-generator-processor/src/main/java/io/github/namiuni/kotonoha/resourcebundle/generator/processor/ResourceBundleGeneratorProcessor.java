@@ -185,7 +185,7 @@ public final class ResourceBundleGeneratorProcessor extends AbstractProcessor {
     }
 
     private String getLocaleKey(final String localeString) {
-        final Locale locale = Locale.of(localeString);
+        final Locale locale = Locale.forLanguageTag(localeString.replace('_', '-'));
         if (locale.equals(Locale.ROOT)) {
             return "";
         }
