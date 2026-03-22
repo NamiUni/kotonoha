@@ -59,15 +59,24 @@ public sealed interface InvocationContext permits InvocationContextImpl {
      * @param method the invoked method (must not be {@code null})
      * @param args   the actual arguments passed to the method (must not be {@code null})
      * @return an invocation context
+     * @throws NullPointerException if {@code method} or {@code args} is {@code null}
+     * @throws IllegalArgumentException if the length of {@code args} does not match the parameter count of {@code method}
      * @see java.lang.reflect.InvocationHandler
      * @since 0.1.0
      */
     @ApiStatus.Internal
-    static InvocationContext of(final Method method, final @Nullable Object[] args) {
+    static InvocationContext of(final Method method, final @Nullable Object[] args) throws IllegalArgumentException {
         Objects.requireNonNull(method, "method");
         Objects.requireNonNull(args, "args");
 
         final Parameter[] parameters = method.getParameters();
+        if (args.length != parameters.length) {
+            throw new IllegalArgumentException(
+                    "args length %d does not match parameter count %d for method '%s'"
+                            .formatted(args.length, parameters.length, method.getName())
+            );
+        }
+
         final InvocationArgument[] arguments = new InvocationArgument[parameters.length];
         for (int i = 0; i < parameters.length; i++) {
             final Parameter parameter = parameters[i];
