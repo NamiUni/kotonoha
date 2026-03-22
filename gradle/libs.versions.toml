@@ -12,7 +12,7 @@ adventure = "4.26.1"
 mini-placeholders = "3.1.0"
 
 # Test
-junit = "6.0.0"
+junit = "6.0.3"
 google-compile-testing = "0.23.0"
 
 [libraries]
