@@ -20,7 +20,6 @@ Depends on `kotonoha-message` and `kotonoha-translator`.
 Define a message interface:
 
 ```java
-@ResourceBundle(baseName = "messages")
 public interface ExampleMessages {
 
     // {0} will be replaced by the value of the 'playerName' argument.
@@ -55,7 +54,7 @@ GlobalTranslator.translator().addSource(translator);
 ExampleMessages messages = KotonohaMessage.createProxy(ExampleMessages.class, FormatTypes.MESSAGE_FORMAT);
 
 // Get the message and send it.
-TranslatableComponent result = messages.welcomeMessage(player.name());
+Component result = messages.welcomeMessage(player.name());
 audience.sendMessage(result); // Welcome, Notch!!
 ```
 
