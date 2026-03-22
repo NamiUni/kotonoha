@@ -8,7 +8,7 @@ google-auto-service = "1.1.1"
 # Java
 jspecify = "1.0.0"
 geantyref = "2.0.1"
-adventure = "4.25.0"
+adventure = "4.26.1"
 mini-placeholders = "3.1.0"
 
 # Test
