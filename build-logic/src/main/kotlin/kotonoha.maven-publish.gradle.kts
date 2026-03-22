@@ -1,5 +1,7 @@
 import com.vanniktech.maven.publish.JavaLibrary
 import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.SourcesJar
+
 plugins {
     id("java-library")
     id("com.vanniktech.maven.publish")
@@ -12,7 +14,7 @@ mavenPublishing {
     configure(
         JavaLibrary(
             javadocJar = JavadocJar.Javadoc(),
-            sourcesJar = true,
+            sourcesJar = SourcesJar.Sources(),
         )
     )
 
@@ -30,6 +32,7 @@ mavenPublishing {
             developer {
                 id.set("NamiUni")
                 name.set("Namiu (うにたろう)")
+                url.set("https://github.com/NamiUni")
             }
         }
         scm {
