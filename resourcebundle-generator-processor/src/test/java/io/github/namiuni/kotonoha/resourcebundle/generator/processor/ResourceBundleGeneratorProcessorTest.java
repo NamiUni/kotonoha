@@ -67,7 +67,7 @@ class ResourceBundleGeneratorProcessorTest {
         @DisplayName("Verify that supported Java source version is correct")
         void testGetSupportedSourceVersion() {
             final ResourceBundleGeneratorProcessor processor = new ResourceBundleGeneratorProcessor();
-            assertEquals(SourceVersion.RELEASE_21, processor.getSupportedSourceVersion());
+            assertEquals(SourceVersion.RELEASE_25, processor.getSupportedSourceVersion());
         }
     }
 
