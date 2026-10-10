@@ -13,7 +13,7 @@ mini-placeholders = "3.1.0"
 
 # Test
 junit = "6.0.3"
-google-compile-testing = "0.23.0"
+google-compile-testing = "0.24.0"
 
 [libraries]
 # Tool
